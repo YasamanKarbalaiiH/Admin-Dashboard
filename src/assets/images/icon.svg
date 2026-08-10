@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <!-- Rounded square background -->
+  <rect x="32" y="32" width="960" height="960" rx="220" ry="220" fill="#f5efff"/>
+  
+  <!-- Capital 'A' with upward arrow integration -->
+  <g transform="translate(512, 460)">
+    <!-- Left leg of 'A' -->
+    <polygon points="-200,300 -90,-280 -40,-280 -140,300" fill="#2e073f"/>
+    
+    <!-- Right leg of 'A' -->
+    <polygon points="200,300 90,-280 40,-280 140,300" fill="#2e073f"/>
+    
+    <!-- Crossbar of 'A' -->
+    <rect x="-155" y="-60" width="310" height="70" rx="10" fill="#7a1cac"/>
+    
+    <!-- Upward arrow embedded in the apex of 'A' -->
+    <!-- Arrow shaft -->
+    <rect x="-16" y="-280" width="32" height="150" rx="8" fill="#cdc1ff"/>
+    
+    <!-- Arrow head - upward pointing -->
+    <polygon points="0,-340 -60,-260 60,-260" fill="#ebd3f8"/>
+    
+    <!-- Analytics line going up the right side -->
+    <polyline points="60,-200 100,-130 150,-160 200,-70" 
+              fill="none" stroke="#ebd3f8" stroke-width="24" stroke-linecap="round" stroke-linejoin="round"/>
+    
+    <!-- Data point dots on the analytics line -->
+    <circle cx="100" cy="-130" r="16" fill="#cdc1ff"/>
+    <circle cx="200" cy="-70" r="16" fill="#cdc1ff"/>
+  </g>
+  
+  <!-- Subtle accent dots bottom-right -->
+  <circle cx="760" cy="760" r="28" fill="#cdc1ff" opacity="0.25"/>
+  <circle cx="800" cy="720" r="12" fill="#ebd3f8" opacity="0.3"/>
+  
+  <!-- Small accent bars for analytics feel -->
+  <rect x="700" y="730" width="20" height="50" rx="6" fill="#7a1cac" opacity="0.12"/>
+  <rect x="735" y="710" width="20" height="70" rx="6" fill="#7a1cac" opacity="0.12"/>
+  <rect x="770" y="680" width="20" height="100" rx="6" fill="#cdc1ff" opacity="0.15"/>
+</svg>
