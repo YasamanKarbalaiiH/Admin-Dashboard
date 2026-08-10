@@ -24,7 +24,7 @@ export default function Settings() {
   }
 
   return (
-    <div className="lg:p-6 lg:w-[60%] w-full mx-auto pt-6 pr-6 text-sm lg:text-md  ">
+    <div className="lg:p-6 lg:w-[60%] w-full mx-auto pt-6 pr-3 pl-4 text-sm lg:text-md  ">
       <div className="flex items-center">
         <svg
           xmlns="http://www.w3.org/2000/svg"

@@ -373,7 +373,7 @@ export default function Customers() {
 
   return (
     <>
-      <div className="grid grid-cols-1 gap-4 text-sm lg:text-md p-2">
+      <div className="grid grid-cols-1 gap-4 text-sm lg:text-md lg:p-2 pl-4 pr-2 pb-2 pt-2">
         <div className="flex  mt-8  flex-wrap gap-4 justify-center">
           <div className="shadow-2xl p-4 rounded-2xl dark:bg-dark-primary dark:text-black">
             <p className="mb-1 text-dark-border dark:text-dark-border ">

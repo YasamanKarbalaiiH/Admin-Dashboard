@@ -28,7 +28,7 @@ export default function Help() {
   };
 
   return (
-    <div className="mt-4 text-sm lg:text-md p-2">
+    <div className="mt-4 text-sm lg:text-md lg:p-2 pl-4 pr-2 pt-2 pb-2">
       <div className="lg:ml-70 flex flex-wrap justify-between">
         <ul className="mb-7 ">
           <h1 className="lg:text-lg text-md font-bold mb-2">Support</h1>

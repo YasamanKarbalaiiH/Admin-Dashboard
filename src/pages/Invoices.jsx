@@ -329,7 +329,7 @@ export default function Invoices() {
   }
   return (
     <>
-      <div className="grid grid-cols-1 gap-4 text-sm lg:text-md p-2">
+      <div className="grid grid-cols-1 gap-4 text-sm lg:text-md lg:p-2 pl-4 pr-2 pb-2 pt-2">
         <div className="flex justify-end mr-7 mt-8">
           <button
             onClick={() => {
