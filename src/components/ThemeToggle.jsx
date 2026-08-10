@@ -7,7 +7,7 @@ export default function ThemeToggle() {
   useEffect(() => {
     let html = document.querySelector("html");
     let body = document.querySelector("body");
-    if (dark && html.classList.contains("dark")) {
+    if (dark) {
       html.classList.remove("dark");
       body.classList.remove("bg-dark-bg");
       body.classList.add("bg-light-bg");
