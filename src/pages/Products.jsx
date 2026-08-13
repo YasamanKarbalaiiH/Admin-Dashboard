@@ -319,7 +319,7 @@ export default function Products() {
                             width="16"
                             height="16"
                             fill="currentColor"
-                            className="bi bi-pencil-square fill-dark-bg  hover:fill-dark-border dark:hover:fill-light-primary"
+                            className="bi bi-pencil-square fill-light-border dark:fill-dark-bg hover:fill-dark-border dark:hover:fill-light-primary"
                             viewBox="0 0 16 16"
                             onClick={() => editBtn(item)}
                           >
@@ -334,7 +334,7 @@ export default function Products() {
                             width="20"
                             height="20"
                             fill="currentColor"
-                            className="bi bi-x fill-dark-bg  hover:fill-dark-border dark:hover:fill-light-primary"
+                            className="bi bi-x fill-light-border dark:fill-dark-bg  hover:fill-dark-border dark:hover:fill-light-primary"
                             viewBox="0 0 16 16"
                             onClick={() => deleteBtn(item.id)}
                           >
@@ -404,7 +404,7 @@ export default function Products() {
                 <button
                   onClick={() => handlePageChange(currentPage - 1)}
                   disabled={currentPage === 1}
-                  className={`px-3 py-1 rounded border border-dark-bg dark:border-light-bg ${
+                  className={`px-3 py-1 rounded border border-light-border dark:border-light-bg ${
                     currentPage === 1
                       ? "opacity-50 cursor-not-allowed"
                       : "hover:bg-light-primary dark:hover:bg-dark-primary dark:hover:text-black "
@@ -422,7 +422,7 @@ export default function Products() {
                     <button
                       key={page}
                       onClick={() => handlePageChange(page)}
-                      className={`w-8 px-3 py-1 rounded-lg border border-dark-bg dark:border-light-bg ${
+                      className={`w-8 px-3 py-1 rounded-lg border border-light-border dark:border-light-bg ${
                         currentPage === page
                           ? "bg-light-primary dark:bg-dark-primary text-black"
                           : "hover:bg-light-primary dark:hover:bg-dark-primary dark:hover:text-black"
@@ -436,7 +436,7 @@ export default function Products() {
                 <button
                   onClick={() => handlePageChange(currentPage + 1)}
                   disabled={currentPage === totalPages}
-                  className={`px-3 py-1 rounded-lg border  border-dark-bg dark:border-light-bg ${
+                  className={`px-3 py-1 rounded-lg border border-light-border dark:border-light-bg ${
                     currentPage === totalPages
                       ? "opacity-50 cursor-not-allowed"
                       : "hover:bg-light-primary dark:hover:bg-dark-primary dark:hover:text-black"

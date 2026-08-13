@@ -376,7 +376,7 @@ export default function Customers() {
       <div className="grid grid-cols-1 gap-4 text-sm lg:text-md lg:p-2 pl-4 pr-2 pb-2 pt-2">
         <div className="flex  mt-8  flex-wrap gap-4 justify-center">
           <div className="shadow-2xl p-4 rounded-2xl dark:bg-dark-primary dark:text-black">
-            <p className="mb-1 text-dark-border dark:text-dark-border ">
+            <p className="mb-1 text-light-border dark:text-dark-border ">
               Not Active Customer
             </p>
             <div className="flex justify-between items-center">
@@ -391,7 +391,7 @@ export default function Customers() {
             </div>
           </div>
           <div className="shadow-2xl p-4 rounded-2xl dark:bg-dark-primary dark:text-black">
-            <p className="mb-1 text-dark-border dark:text-dark-border ">
+            <p className="mb-1 text-light-border dark:text-dark-border ">
               Total Customers
             </p>
             <div className="flex justify-between items-center">
@@ -401,7 +401,7 @@ export default function Customers() {
           </div>
 
           <div className="shadow-2xl p-4 rounded-2xl dark:bg-dark-primary dark:text-black">
-            <p className="mb-1 text-dark-border dark:text-dark-border ">
+            <p className="mb-1 text-light-border dark:text-dark-border ">
               VIP Customers
             </p>
             <div className="flex justify-between items-center">
@@ -416,7 +416,7 @@ export default function Customers() {
             </div>
           </div>
           <div className="shadow-2xl p-4 rounded-2xl dark:bg-dark-primary dark:text-black">
-            <p className="mb-1 text-dark-border dark:text-dark-border ">
+            <p className="mb-1 text-light-border dark:text-dark-border ">
               New this month
             </p>
             <div className="flex justify-between items-center">
@@ -477,7 +477,7 @@ export default function Customers() {
                             width="16"
                             height="16"
                             fill="currentColor"
-                            className="bi bi-pencil-square fill-dark-bg  hover:fill-dark-border dark:hover:fill-light-primary"
+                            className="bi bi-pencil-square fill-light-border dark:fill-dark-bg  hover:fill-dark-border dark:hover:fill-light-primary"
                             viewBox="0 0 16 16"
                             onClick={() => editBtn(item)}
                           >
@@ -492,7 +492,7 @@ export default function Customers() {
                             width="20"
                             height="20"
                             fill="currentColor"
-                            className="bi bi-x fill-dark-bg  hover:fill-dark-border dark:hover:fill-light-primary"
+                            className="bi bi-x dark:fill-dark-bg fill-light-border hover:fill-dark-border dark:hover:fill-light-primary"
                             viewBox="0 0 16 16"
                             onClick={() => deleteBtn(item.id)}
                           >
@@ -594,7 +594,7 @@ export default function Customers() {
                   <button
                     onClick={() => handlePageChange(currentPage - 1)}
                     disabled={currentPage === 1}
-                    className={`px-3 py-1 rounded border border-dark-bg dark:border-light-bg ${
+                    className={`px-3 py-1 rounded border border-light-border dark:border-white ${
                       currentPage === 1
                         ? "opacity-50 cursor-not-allowed"
                         : "hover:bg-light-primary dark:hover:bg-dark-primary dark:hover:text-black "
@@ -612,7 +612,7 @@ export default function Customers() {
                       <button
                         key={page}
                         onClick={() => handlePageChange(page)}
-                        className={`w-8 px-3 py-1 rounded-lg border border-dark-bg dark:border-light-bg ${
+                        className={`w-8 px-3 py-1 rounded-lg border border-light-border dark:border-white ${
                           currentPage === page
                             ? "bg-light-primary dark:bg-dark-primary text-black"
                             : "hover:bg-light-primary dark:hover:bg-dark-primary dark:hover:text-black"
@@ -626,7 +626,7 @@ export default function Customers() {
                   <button
                     onClick={() => handlePageChange(currentPage + 1)}
                     disabled={currentPage === totalPages}
-                    className={`px-3 py-1 rounded-lg border  border-dark-bg dark:border-light-bg ${
+                    className={`px-3 py-1 rounded-lg border  border-light-border dark:border-white ${
                       currentPage === totalPages
                         ? "opacity-50 cursor-not-allowed"
                         : "hover:bg-light-primary dark:hover:bg-dark-primary dark:hover:text-black"
