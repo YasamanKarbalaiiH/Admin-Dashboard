@@ -59,17 +59,30 @@ const GrowthChart = ({ data }) => {
     >
       <h2
         style={{ marginBottom: "30px" }}
-        className="text-black font-bold text-lg"
+        className="text-black  font-bold text-lg"
       >
         Customer Growth Chart
       </h2>
 
-      <div className=" h-50 mb-2">
+      <div className="h-50 mb-2">
         <ResponsiveContainer width="100%" height="100%">
           <LineChart data={growthData}>
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="monthName" />
-            <YAxis />
+            <CartesianGrid strokeDasharray="3 3" stroke="var(--chart-grid)" />
+            <XAxis
+              dataKey="monthName"
+              stroke="var(--chart-axis)"
+              tick={{
+                fill: "var(--chart-axis)",
+                fontSize: 12,
+              }}
+            />
+            <YAxis
+              stroke="var(--chart-axis)"
+              tick={{
+                fill: "var(--chart-axis)",
+                fontSize: 12,
+              }}
+            />
             <Tooltip
               formatter={(value, name) => {
                 const labels = {
@@ -78,15 +91,39 @@ const GrowthChart = ({ data }) => {
                 };
                 return [value, labels[name] || name];
               }}
+              contentStyle={{
+                backgroundColor: "var(--tooltip-bg)",
+                border: "var(--tooltip-border)",
+                borderRadius: "8px",
+                color: "var(--tooltip-text)",
+              }}
+              labelStyle={{
+                color: "var(--tooltip-text)",
+              }}
             />
-            <Legend />
+            <Legend
+              wrapperStyle={{
+                color: "var(--legend-color)",
+                fontSize: 12,
+                paddingTop: 10,
+              }}
+            />
             <Line
               type="monotone"
               dataKey="count"
-              stroke=" #7a1cac"
+              stroke="var(--chart-line)"
               strokeWidth={3}
               name="Total Customers"
-              dot={{ r: 6 }}
+              dot={{
+                r: 6,
+                fill: "none",
+                stroke: "var(--chart-line)",
+              }}
+              activeDot={{
+                r: 8,
+                fill: "none",
+                stroke: "var(--chart-line)",
+              }}
             />
           </LineChart>
         </ResponsiveContainer>

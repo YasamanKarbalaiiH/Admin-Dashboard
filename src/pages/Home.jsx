@@ -3,7 +3,7 @@ import RevenueChart from "../components/RevenueChart";
 import revenueIcon from "../assets/images/icons8-revenue-48.png";
 import productIcon from "../assets/images/icons8-product-64.png";
 import customerIcon from "../assets/images/icons8-customers-48.png";
-import invoiceIcon from "../assets/images/icons8-invoice-64.png";
+import invoiceIcon from "../assets/images/icons8-invoice-100.png";
 export default function Home() {
   const data = {
     revenue: {

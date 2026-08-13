@@ -453,7 +453,7 @@ export default function Customers() {
           <div className="flex flex-col justify-center items-center md:w-full lg:w-auto">
             <div className="mt-2 w-full mr-2  ">
               <table className="hidden md:table lg:ml-57.5 md:w-full lg:w-auto border-collapse dark:bg-dark-primary text-black">
-                <thead className="dark:bg-light-primary bg-[rgba(177,176,176,0.3)]">
+                <thead className="dark:bg-dark-border bg-[rgba(177,176,176,0.3)]">
                   <tr>
                     <th className="border border-gray-400  p-1 lg:p-3">Name</th>
                     <th className="border  border-gray-400  p-1 lg:p-3">

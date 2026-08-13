@@ -356,7 +356,7 @@ export default function Invoices() {
         </div>
         <div className="mt-2 w-full">
           <table className="md:table hidden lg:ml-57.5  lg:w-[80%] h-62.5 lg:h-auto  border-collapse  dark:bg-dark-primary dark:text-black ">
-            <thead className="bg-[rgba(177,176,176,0.3)] dark:bg-light-primary">
+            <thead className="bg-[rgba(177,176,176,0.3)] dark:bg-dark-border">
               <tr>
                 <th className="border  border-gray-400  p-1 lg:p-3">
                   Customer

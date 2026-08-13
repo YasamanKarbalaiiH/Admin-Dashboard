@@ -8,8 +8,6 @@ const data = [
   { name: "Other", value: 10 },
 ];
 
-const COLORS = ["#4a1a6b", "#7b3a9e", "#a46bc1", "#c895d8", "#e5b8eb"];
-
 export default function PieCharts() {
   const total = data.reduce((acc, item) => acc + item.value, 0);
 
@@ -27,12 +25,13 @@ export default function PieCharts() {
               paddingAngle={2}
               dataKey="value"
               label={true}
+              labelLine={true}
             >
               {data.map((entry, index) => (
                 <Cell
                   key={`cell-${index}`}
-                  fill={COLORS[index % COLORS.length]}
-                  stroke="#fff"
+                  fill={`var(--pie-color-${index})`}
+                  stroke="var(--pie-stroke)"
                   strokeWidth={2}
                 />
               ))}
@@ -40,16 +39,20 @@ export default function PieCharts() {
             <Tooltip
               formatter={(value) => `${((value / total) * 100).toFixed(0)}%`}
               contentStyle={{
-                backgroundColor: "#fff",
-                border: "1px solid #7a1cac",
+                backgroundColor: "var(--tooltip-bg)",
+                border: "var(--tooltip-border)",
                 borderRadius: "8px",
+                color: "var(--tooltip-text)",
+              }}
+              labelStyle={{
+                color: "var(--tooltip-text)",
               }}
             />
           </PieChart>
         </ResponsiveContainer>
       </div>
 
-      <div className="w-full md:w-1/2 flex flex-col justify-center p-4  mt-4 md:mt-0">
+      <div className="w-full md:w-1/2 flex flex-col justify-center p-4 mt-4 md:mt-0">
         <h3 className="font-bold text-lg mb-4 dark:text-white text-black">
           Category Distribution
         </h3>
@@ -59,12 +62,12 @@ export default function PieCharts() {
           return (
             <div
               key={index}
-              className=" flex items-center justify-between mb-2 w-full md:w-48 text-sm"
+              className="flex items-center justify-between mb-2 w-full md:w-48 text-sm"
             >
-              <div className=" flex items-center gap-2">
+              <div className="flex items-center gap-2">
                 <span
                   className="w-3 h-3 rounded-full"
-                  style={{ backgroundColor: COLORS[index % COLORS.length] }}
+                  style={{ backgroundColor: `var(--pie-color-${index})` }}
                 ></span>
 
                 <span className="dark:text-white text-black">{item.name}</span>

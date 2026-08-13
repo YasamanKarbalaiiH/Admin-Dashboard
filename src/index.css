@@ -3,10 +3,10 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-  --color-dark-bg: #2e073f;
-  --color-dark-surface: #7a1cac;
-  --color-dark-border: #ad49e1;
-  --color-dark-primary: #ebd3f8;
+  --color-dark-bg: #190482;
+  --color-dark-surface: #7752fe;
+  --color-dark-border: #8e8ffa;
+  --color-dark-primary: #c2d9ff;
 
   --color-light-bg: #f5efff;
   --color-light-surface: #e5d9f2;
@@ -27,5 +27,77 @@
   * {
     transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
     outline: none;
+  }
+}
+
+@layer base {
+  :root {
+    --chart-grid: #374151;
+    --chart-axis: #9ca3af;
+    --chart-tooltip-bg: #ffffff;
+    --chart-tooltip-text: #000000;
+    --chart-revenue: #7a1cac;
+    --chart-expenses: #cdc1ff;
+  }
+
+  .dark {
+    --chart-grid: #ffffff;
+    --chart-axis: #ffffff;
+    --chart-tooltip-bg: #ffffff;
+    --chart-tooltip-text: #000000;
+    --chart-revenue: #7752fe;
+    --chart-expenses: #c2d9ff;
+  }
+}
+
+@layer base {
+  :root {
+    /* Light mode colors */
+    --pie-color-0: #4a1a6b;
+    --pie-color-1: #7b3a9e;
+    --pie-color-2: #a46bc1;
+    --pie-color-3: #c895d8;
+    --pie-color-4: #e5b8eb;
+    --pie-stroke: #ffffff;
+    --tooltip-bg: #ffffff;
+    --tooltip-border: 1px solid #7a1cac;
+    --tooltip-text: #000000;
+  }
+
+  .dark {
+    /* Dark mode colors */
+    --pie-color-0: #41c9e2;
+    --pie-color-1: #7752fe;
+    --pie-color-2: #8e8ffa;
+    --pie-color-3: #c2d9ff;
+    --pie-color-4: #8cc0eb;
+    --pie-stroke: #1f2937;
+    --tooltip-bg: #1f2937;
+    --tooltip-border: 1px solid #7752fe;
+    --tooltip-text: #ffffff;
+  }
+}
+
+@layer base {
+  :root {
+    /* Light mode */
+    --chart-grid: #e5e7eb;
+    --chart-axis: #6b7280;
+    --chart-line: #7a1cac;
+    --tooltip-bg: #ffffff;
+    --tooltip-border: 1px solid #7a1cac;
+    --tooltip-text: #000000;
+    --legend-color: #1f2937;
+  }
+
+  .dark {
+    /* Dark mode */
+    --chart-grid: #374151;
+    --chart-axis: #9ca3af;
+    --chart-line: #7752fe;
+    --tooltip-bg: #1f2937;
+    --tooltip-border: 1px solid #7752fe;
+    --tooltip-text: #ffffff;
+    --legend-color: #e5e7eb;
   }
 }

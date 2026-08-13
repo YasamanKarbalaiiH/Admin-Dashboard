@@ -4,6 +4,11 @@ import Modal from "../components/Modal";
 import Swal from "sweetalert2";
 import { useSearch } from "../context/SearchContext";
 import BarChart from "../components/BarChart";
+import elect from "../assets/images/icons8-electronic-64.png";
+import sushi from "../assets/images/icons8-sushi-64.png";
+import books from "../assets/images/icons8-books-64.png";
+import shirt from "../assets/images/icons8-t-shirt-64.png";
+import others from "../assets/images/icons8-product-64.png";
 export default function Products() {
   const [data, setData] = useState([
     { id: 1, category: "Electronics", title: "ASUS ROG Laptop", price: 1500 },
@@ -291,7 +296,7 @@ export default function Products() {
           <div className="flex flex-col justify-center items-center">
             <div className="mt-2 w-full ">
               <table className="md:table hidden lg:w-[87%] w-full h-62.5 lg:h-auto lg:ml-57.5  border-collapse dark:bg-dark-primary text-black ">
-                <thead className="dark:bg-light-primary bg-[rgba(177,176,176,0.3)]">
+                <thead className="dark:bg-dark-border bg-[rgba(177,176,176,0.3)]">
                   <tr>
                     <th className="border border-gray-400  p-1 lg:p-3">
                       Category
@@ -336,6 +341,22 @@ export default function Products() {
                             <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708" />
                           </svg>
                           {item.category}
+                          <img
+                            width={20}
+                            height={20}
+                            className="ml-1"
+                            src={
+                              item.category == "Electronics"
+                                ? elect
+                                : item.category == "Food"
+                                  ? sushi
+                                  : item.category == "Books"
+                                    ? books
+                                    : item.category == "Clothes"
+                                      ? shirt
+                                      : others
+                            }
+                          />
                         </div>
                       </td>
                       <td className="border border-gray-400 p-3">
@@ -352,7 +373,25 @@ export default function Products() {
                 {currentItems.map((item) => {
                   return (
                     <div className="shadow-2xl rounded-2xl mb-8 p-6 dark:bg-dark-primary text-black">
-                      <p className="mb-3">Category : {item.category}</p>
+                      <p className="mb-3 flex">
+                        Category : {item.category}{" "}
+                        <img
+                          width={20}
+                          height={20}
+                          className="ml-1"
+                          src={
+                            item.category == "Electronics"
+                              ? elect
+                              : item.category == "Food"
+                                ? sushi
+                                : item.category == "Books"
+                                  ? books
+                                  : item.category == "Clothes"
+                                    ? shirt
+                                    : others
+                          }
+                        />
+                      </p>
                       <p className="mb-3">Title : {item.title}</p>
                       <p className="mb-3">Price : {item.price}</p>
                     </div>
