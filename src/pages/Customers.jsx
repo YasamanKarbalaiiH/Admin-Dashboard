@@ -281,12 +281,16 @@ export default function Customers() {
     );
   }
   function addCustomer(customer) {
+    const now = new Date();
+
+    const formattedDate = now.toISOString().slice(0, 19);
     setData([
       ...data,
       {
         id: data.length + 1,
         ...customer,
         status: "Active",
+        registerDate: formattedDate,
       },
     ]);
   }
