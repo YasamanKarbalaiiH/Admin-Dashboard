@@ -1,5 +1,5 @@
 import ThemeToggle from "./ThemeToggle";
-import { useSearch } from "../context/SearchContext";
+import { useSearch } from "../hooks/useSearch";
 
 export default function Navbar() {
   const { search, setSearch } = useSearch();

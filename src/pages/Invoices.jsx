@@ -1,10 +1,10 @@
-import { useEffect, useState } from "react";
-import { useSearch } from "../context/SearchContext";
-import Swal from "sweetalert2";
+import { usePagination } from "../hooks/usePagination";
+import { useModal } from "../hooks/useModal";
+import { useCrud } from "../hooks/useCrud";
 import Modal from "../components/Modal";
 
 export default function Invoices() {
-  const [data, setData] = useState([
+  const initialData = [
     {
       id: 1,
       customer: "Ali Mohammadi",
@@ -165,187 +165,57 @@ export default function Invoices() {
       status: "paid",
       items: 10,
     },
-  ]);
-  //Search
-  const { search } = useSearch();
-  const filteredData = data.filter((item) =>
-    Object.values(item).join(" ").toLowerCase().includes(search.toLowerCase()),
-  );
-  useEffect(() => {
-    setCurrentPage(1);
-  }, [search]);
-  //Paigination
-  const itemsPerPage = 5;
-  const [currentPage, setCurrentPage] = useState(1);
-  const indexOfLastItem = currentPage * itemsPerPage;
-  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = filteredData.slice(indexOfFirstItem, indexOfLastItem);
-  const totalPages = Math.ceil(filteredData.length / itemsPerPage);
-  const handlePageChange = (pageNumber) => {
-    setCurrentPage(pageNumber);
-  };
-  const pages =
-    totalPages <= 5
-      ? Array.from({ length: totalPages }, (_, i) => i + 1)
-      : currentPage <= 3
-        ? [1, 2, 3, 4, "...", totalPages]
-        : currentPage >= totalPages - 2
-          ? [
-              1,
-              "...",
-              totalPages - 3,
-              totalPages - 2,
-              totalPages - 1,
-              totalPages,
-            ]
-          : [
-              1,
-              "...",
-              currentPage - 1,
-              currentPage,
-              currentPage + 1,
-              "...",
-              totalPages,
-            ];
-
-  //Modal
-  const invoiceFields = [
-    {
-      name: "customer",
-      label: "Customer",
-      type: "text",
-    },
-    {
-      name: "date",
-      label: "Date",
-      type: "date",
-    },
-    {
-      name: "total",
-      label: "Total",
-      type: "number",
-    },
-    {
-      name: "status",
-      label: "Status",
-      type: "text",
-    },
-    {
-      name: "items",
-      label: "Items",
-      type: "number",
-    },
   ];
+
+  const { data, addItem, updateItem, deleteItem } = useCrud(
+    initialData,
+    (item) => ({
+      ...item,
+      total: Number(item.total),
+      items: Number(item.items),
+    }),
+  );
+
+  const { currentItems, currentPage, totalPages, pages, handlePageChange } =
+    usePagination(data, 5);
+
+  const invoiceFields = [
+    { name: "customer", label: "Customer", type: "text" },
+    { name: "date", label: "Date", type: "date" },
+    { name: "total", label: "Total", type: "number" },
+    { name: "status", label: "Status", type: "text" },
+    { name: "items", label: "Items", type: "number" },
+  ];
+
   const createFormData = (fields) =>
     fields.reduce((obj, field) => {
       obj[field.name] = "";
       return obj;
     }, {});
-  const [formData, setFormData] = useState(createFormData(invoiceFields));
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [editingInvoice, setEditingInvoice] = useState(null);
-  function updateInvoice(updated) {
-    setData(
-      data.map((item) =>
-        item.id === updated.id
-          ? {
-              ...updated,
-              total: Number(updated.total),
-              ...updated,
-              items: Number(updated.items),
-            }
-          : item,
-      ),
-    );
-  }
-  function addInvoice(invoice) {
-    setData([
-      ...data,
-      {
-        id: data.length + 1,
-        ...invoice,
-        total: Number(invoice.total),
-        ...invoice,
-        items: Number(invoice.items),
-      },
-    ]);
-  }
-  function deleteBtn(id) {
-    Swal.fire({
-      title: "Are you sure?",
-      text: "You won't be able to revert this!",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#7a1cac",
-      cancelButtonColor: "#ad49e1",
-      confirmButtonText: "Yes, delete it!",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        setData(data.filter((item) => item.id !== id));
-        Swal.fire({
-          title: "Deleted!",
-          text: "Your invoice has been deleted.",
-          icon: "success",
-          confirmButtonColor: "#ad49e1",
-          confirmButtonText: "OK",
-        });
-      }
-    });
-  }
-  useEffect(() => {
-    if (editingInvoice) {
-      setFormData(editingInvoice);
-    } else {
-      setFormData(createFormData(invoiceFields));
-    }
-  }, [editingInvoice]);
-  function handleChange(e) {
-    const { name, value } = e.target;
 
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  }
-  function handleSubmit(e) {
-    e.preventDefault();
+  const {
+    formData,
+    isModalOpen,
+    editingItem: editingInvoice,
+    handleChange,
+    handleSubmit,
+    openModal,
+    closeModal,
+  } = useModal(invoiceFields, createFormData, addItem, updateItem);
 
-    if (editingInvoice) {
-      updateInvoice({
-        ...formData,
-        id: editingInvoice.id,
-      });
-    } else {
-      addInvoice(formData);
-    }
-    setFormData(createFormData(invoiceFields));
-
-    setEditingInvoice(null);
-    setIsModalOpen(false);
-  }
-  function editBtn(customer) {
-    setEditingInvoice(customer);
-    setIsModalOpen(true);
-  }
   return (
     <>
       <div className="grid grid-cols-1 gap-4 text-sm lg:text-md lg:p-2 pl-4 pr-2 pb-2 pt-2">
         <div className="flex justify-end mr-7 mt-8">
           <button
-            onClick={() => {
-              setEditingInvoice(null);
-              setIsModalOpen(true);
-            }}
+            onClick={() => openModal()}
             className=" outline-none border-2 dark:bg-dark-surface dark:border-dark-primary border-light-primary p-3 rounded-lg hover:bg-light-accent dark:hover:bg-dark-border"
           >
             + Create Invoice
           </button>
           <Modal
             isOpen={isModalOpen}
-            onClose={() => {
-              setIsModalOpen(false);
-              setEditingInvoice(null);
-            }}
+            onClose={closeModal}
             fields={invoiceFields}
             formData={formData}
             handleChange={handleChange}
@@ -377,9 +247,9 @@ export default function Invoices() {
                         width="16"
                         height="16"
                         fill="currentColor"
-                        className="bi bi-pencil-square fill-light-border dark:fill-dark-bg  hover:fill-dark-border dark:hover:fill-light-primary"
+                        className="bi bi-pencil-square fill-light-border dark:fill-dark-bg  hover:fill-dark-border dark:hover:fill-light-primary cursor-pointer"
                         viewBox="0 0 16 16"
-                        onClick={() => editBtn(item)}
+                        onClick={() => openModal(item)}
                       >
                         <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
                         <path
@@ -392,9 +262,9 @@ export default function Invoices() {
                         width="20"
                         height="20"
                         fill="currentColor"
-                        className="bi bi-x fill-light-border dark:fill-dark-bg hover:fill-dark-border dark:hover:fill-light-primary"
+                        className="bi bi-x fill-light-border dark:fill-dark-bg hover:fill-dark-border dark:hover:fill-light-primary cursor-pointer"
                         viewBox="0 0 16 16"
-                        onClick={() => deleteBtn(item.id)}
+                        onClick={() => deleteItem(item.id, "invoice")}
                       >
                         <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708" />
                       </svg>
@@ -432,7 +302,10 @@ export default function Invoices() {
           <div className="md:hidden mr-2">
             {currentItems.map((item) => {
               return (
-                <div className="shadow-2xl rounded-2xl mb-8 p-6 dark:bg-dark-primary text-black">
+                <div
+                  key={item.id}
+                  className="shadow-2xl rounded-2xl mb-8 p-6 dark:bg-dark-primary text-black"
+                >
                   <p className="mb-3">{item.customer}</p>
                   <p className="mb-3">Date : {item.date}</p>
                   <p className="mb-3">Total : {item.total}</p>

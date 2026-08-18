@@ -21,7 +21,7 @@ export default function Sidebar() {
     absolute
     top-5
     left-5
-    z-[100]
+    z-100
     lg:hidden
     fill-dark-bg
     dark:fill-white

@@ -1,17 +1,27 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useState } from "react";
 
 const SearchContext = createContext();
 
-export function SearchProvider({ children }) {
+function SearchProvider({ children }) {
   const [search, setSearch] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const handleSearch = (value) => {
+    setSearch(value);
+    setCurrentPage(1);
+  };
 
   return (
-    <SearchContext.Provider value={{ search, setSearch }}>
+    <SearchContext.Provider
+      value={{
+        search,
+        setSearch: handleSearch,
+        currentPage,
+        setCurrentPage,
+      }}
+    >
       {children}
     </SearchContext.Provider>
   );
 }
-
-export function useSearch() {
-  return useContext(SearchContext);
-}
+export { SearchContext, SearchProvider };

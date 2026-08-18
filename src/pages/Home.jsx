@@ -87,7 +87,6 @@ export default function Home() {
                   width={30}
                   height={30}
                   src={invoiceIcon}
-                  alt=""
                   className="ml-5"
                 />
               </p>

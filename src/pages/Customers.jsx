@@ -1,6 +1,4 @@
-import { useEffect, useState } from "react";
-import { useSearch } from "../context/SearchContext";
-import Swal from "sweetalert2";
+import { useMemo } from "react";
 import Modal from "../components/Modal";
 import personIcon from "../assets/images/icons8-person-48.png";
 import personRed from "../assets/images/icons8-person-64.png";
@@ -8,8 +6,12 @@ import vipIcon from "../assets/images/icons8-vip-64.png";
 import customersIcon from "../assets/images/icons8-customers-48.png";
 import contact from "../assets/images/icons8-new-contact-80.png";
 import GrowthChart from "../components/GrowthChart";
+import { usePagination } from "../hooks/usePagination";
+import { useModal } from "../hooks/useModal";
+import { useCrud } from "../hooks/useCrud";
+import { useStatistics } from "../hooks/useStatistics";
 export default function Customers() {
-  const [data, setData] = useState([
+  const initialData = [
     {
       id: 1,
       fullName: "Ali Mohammadi",
@@ -190,49 +192,17 @@ export default function Customers() {
       type: "VIP",
       registerDate: "2026-03-05T13:00:00",
     },
-  ]);
-
-  //Search
-  const { search } = useSearch();
-  const filteredData = data.filter((item) =>
-    Object.values(item).join(" ").toLowerCase().includes(search.toLowerCase()),
+  ];
+  const { data, addItem, updateItem, deleteItem } = useCrud(
+    initialData,
+    (item) => ({
+      ...item,
+      status: "Active",
+      registerDate: new Date().toISOString().slice(0, 19),
+    }),
   );
-  useEffect(() => {
-    setCurrentPage(1);
-  }, [search]);
-  //Paigination
-  const itemsPerPage = 5;
-  const [currentPage, setCurrentPage] = useState(1);
-  const indexOfLastItem = currentPage * itemsPerPage;
-  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = filteredData.slice(indexOfFirstItem, indexOfLastItem);
-  const totalPages = Math.ceil(filteredData.length / itemsPerPage);
-  const handlePageChange = (pageNumber) => {
-    setCurrentPage(pageNumber);
-  };
-  const pages =
-    totalPages <= 5
-      ? Array.from({ length: totalPages }, (_, i) => i + 1)
-      : currentPage <= 3
-        ? [1, 2, 3, 4, "...", totalPages]
-        : currentPage >= totalPages - 2
-          ? [
-              1,
-              "...",
-              totalPages - 3,
-              totalPages - 2,
-              totalPages - 1,
-              totalPages,
-            ]
-          : [
-              1,
-              "...",
-              currentPage - 1,
-              currentPage,
-              currentPage + 1,
-              "...",
-              totalPages,
-            ];
+  const { currentItems, currentPage, totalPages, pages, handlePageChange } =
+    usePagination(data, 5);
   //Modal
   const customerFields = [
     {
@@ -266,114 +236,32 @@ export default function Customers() {
       obj[field.name] = "";
       return obj;
     }, {});
-  const [formData, setFormData] = useState(createFormData(customerFields));
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [editingCustomer, setEditingCustomer] = useState(null);
-  function updateCustomer(updated) {
-    setData(
-      data.map((item) =>
-        item.id === updated.id
-          ? {
-              ...updated,
-            }
-          : item,
-      ),
-    );
-  }
-  function addCustomer(customer) {
-    const now = new Date();
-
-    const formattedDate = now.toISOString().slice(0, 19);
-    setData([
-      ...data,
-      {
-        id: data.length + 1,
-        ...customer,
-        status: "Active",
-        registerDate: formattedDate,
-      },
-    ]);
-  }
-  function deleteBtn(id) {
-    Swal.fire({
-      title: "Are you sure?",
-      text: "You won't be able to revert this!",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#7a1cac",
-      cancelButtonColor: "#ad49e1",
-      confirmButtonText: "Yes, delete it!",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        setData(data.filter((item) => item.id !== id));
-        Swal.fire({
-          title: "Deleted!",
-          text: "Your customer has been deleted.",
-          icon: "success",
-          confirmButtonColor: "#ad49e1",
-          confirmButtonText: "OK",
-        });
-      }
-    });
-  }
-
-  useEffect(() => {
-    if (editingCustomer) {
-      setFormData(editingCustomer);
-    } else {
-      setFormData(createFormData(customerFields));
-    }
-  }, [editingCustomer]);
-
-  function handleChange(e) {
-    const { name, value } = e.target;
-
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  }
-  function handleSubmit(e) {
-    e.preventDefault();
-
-    if (editingCustomer) {
-      updateCustomer({
-        ...formData,
-        id: editingCustomer.id,
-      });
-    } else {
-      addCustomer(formData);
-    }
-    setFormData(createFormData(customerFields));
-
-    setEditingCustomer(null);
-    setIsModalOpen(false);
-  }
-  function editBtn(customer) {
-    setEditingCustomer(customer);
-    setIsModalOpen(true);
-  }
-  //numbers
-  let inActive = 0;
-  let VIPcustomers = 0;
-  data.map((i) => {
-    i.status == "Not Active" ? inActive++ : inActive;
-    i.type == "VIP" ? VIPcustomers++ : VIPcustomers;
+  const {
+    formData,
+    isModalOpen,
+    editingItem: editingCustomer,
+    handleChange,
+    handleSubmit,
+    openModal,
+    closeModal,
+  } = useModal(customerFields, createFormData, addItem, updateItem);
+  const stats = useStatistics(data, {
+    inActive: { field: "status", value: "Not Active" },
+    VIPcustomers: { field: "type", value: "VIP" },
   });
-
-  //date
-  let newCustomerNum;
-  const getTopNewest = (data, count = 3) => {
+  const { inActive, VIPcustomers } = stats;
+  const threeNewest = useMemo(() => {
     return [...data]
       .sort((a, b) => new Date(b.registerDate) - new Date(a.registerDate))
-      .slice(0, count);
-  };
-  const threeNewest = getTopNewest(data, 3);
-  const now = new Date();
-  const customersDate = data.filter((i) => {
-    return new Date(i.registerDate).getMonth() == now.getMonth();
-  });
-  newCustomerNum = customersDate.length;
+      .slice(0, 3);
+  }, [data]);
+
+  const newCustomerNum = useMemo(() => {
+    const now = new Date();
+    return data.filter(
+      (i) => new Date(i.registerDate).getMonth() === now.getMonth(),
+    ).length;
+  }, [data]);
 
   return (
     <>
@@ -432,8 +320,7 @@ export default function Customers() {
         <div className="flex justify-end mr-7 mt-8">
           <button
             onClick={() => {
-              setEditingCustomer(null);
-              setIsModalOpen(true);
+              openModal();
             }}
             className="  outline-none border-2 dark:bg-dark-surface dark:border-dark-primary border-light-primary p-3 rounded-lg hover:bg-light-accent dark:hover:bg-dark-border"
           >
@@ -441,10 +328,7 @@ export default function Customers() {
           </button>
           <Modal
             isOpen={isModalOpen}
-            onClose={() => {
-              setIsModalOpen(false);
-              setEditingCustomer(null);
-            }}
+            onClose={closeModal}
             fields={customerFields}
             formData={formData}
             handleChange={handleChange}
@@ -483,7 +367,7 @@ export default function Customers() {
                             fill="currentColor"
                             className="bi bi-pencil-square fill-light-border dark:fill-dark-bg  hover:fill-dark-border dark:hover:fill-light-primary"
                             viewBox="0 0 16 16"
-                            onClick={() => editBtn(item)}
+                            onClick={() => openModal(item)}
                           >
                             <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
                             <path
@@ -498,7 +382,7 @@ export default function Customers() {
                             fill="currentColor"
                             className="bi bi-x dark:fill-dark-bg fill-light-border hover:fill-dark-border dark:hover:fill-light-primary"
                             viewBox="0 0 16 16"
-                            onClick={() => deleteBtn(item.id)}
+                            onClick={() => deleteItem(item.id, "customer")}
                           >
                             <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708" />
                           </svg>
@@ -548,7 +432,7 @@ export default function Customers() {
                           fill="currentColor"
                           className="bi bi-pencil-square fill-dark-bg  hover:fill-dark-border dark:hover:fill-light-primary"
                           viewBox="0 0 16 16"
-                          onClick={() => editBtn(item)}
+                          onClick={() => openModal(item)}
                         >
                           <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
                           <path
@@ -563,7 +447,7 @@ export default function Customers() {
                           fill="currentColor"
                           className="bi bi-x fill-dark-bg  hover:fill-dark-border dark:hover:fill-light-primary"
                           viewBox="0 0 16 16"
-                          onClick={() => deleteBtn(item.id)}
+                          onClick={() => deleteItem(item.id, "customer")}
                         >
                           <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708" />
                         </svg>
@@ -573,7 +457,7 @@ export default function Customers() {
                           height={20}
                           src={vipIcon}
                           alt=""
-                          className={`ml-2 ${item.type == "VIP" ? "" : "hidden"}`}
+                          className={`ml-2 ${item.type === "VIP" ? "" : "hidden"}`}
                         />
                       </p>
                       <p className="mb-3">Phone : {item.phone}</p>
@@ -661,7 +545,7 @@ export default function Customers() {
                             height={20}
                             src={vipIcon}
                             alt=""
-                            className={`ml-2 ${item.type == "VIP" ? "" : "hidden"}`}
+                            className={`ml-2 ${item.type === "VIP" ? "" : "hidden"}`}
                           />
                         </div>
                         <span>{item.phone}</span>
