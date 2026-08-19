@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Swal from "sweetalert2";
-
+import { v4 as uuidv4 } from "uuid";
 export function useCrud(initialData, transformItem = (item) => item) {
   const [data, setData] = useState(initialData);
 
@@ -8,7 +8,7 @@ export function useCrud(initialData, transformItem = (item) => item) {
     setData((prev) => [
       ...prev,
       {
-        id: prev.length + 1,
+        id: uuidv4(),
         ...transformItem(newItem),
       },
     ]);

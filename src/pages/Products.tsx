@@ -9,96 +9,143 @@ import sushi from "../assets/images/icons8-sushi-64.png";
 import books from "../assets/images/icons8-books-64.png";
 import shirt from "../assets/images/icons8-t-shirt-64.png";
 import others from "../assets/images/icons8-product-64.png";
-
+import { Product } from "../Types/product";
+import { Fields } from "../Types/fields";
+import { v4 as uuidv4 } from "uuid";
 export default function Products() {
-  const initialData = [
-    { id: 1, category: "Electronics", title: "ASUS ROG Laptop", price: 1500 },
-    { id: 2, category: "Clothes", title: "Adidas Men's T-Shirt", price: 40 },
-    { id: 3, category: "Books", title: "The Art of Clear Thinking", price: 18 },
-    { id: 4, category: "Food", title: "Family Size Pizza", price: 25 },
-    { id: 5, category: "Other", title: "Handmade Leather Bag", price: 85 },
+  const initialData : Product[] = [
     {
-      id: 6,
+      id: uuidv4(),
+      category: "Electronics",
+      title: "ASUS ROG Laptop",
+      price: 1500,
+    },
+    {
+      id: uuidv4(),
+      category: "Clothes",
+      title: "Adidas Men's T-Shirt",
+      price: 40,
+    },
+    {
+      id: uuidv4(),
+      category: "Books",
+      title: "The Art of Clear Thinking",
+      price: 18,
+    },
+    { id: uuidv4(), category: "Food", title: "Family Size Pizza", price: 25 },
+    {
+      id: uuidv4(),
+      category: "Other",
+      title: "Handmade Leather Bag",
+      price: 85,
+    },
+    {
+      id: uuidv4(),
       category: "Electronics",
       title: "Sony WH-1000XM5 Headphones",
       price: 350,
     },
-    { id: 7, category: "Clothes", title: "Nike Air Max Sneakers", price: 160 },
     {
-      id: 8,
+      id: uuidv4(),
+      category: "Clothes",
+      title: "Nike Air Max Sneakers",
+      price: 160,
+    },
+    {
+      id: uuidv4(),
       category: "Books",
       title: "Tuesdays with Morrie Trilogy",
       price: 22,
     },
-    { id: 9, category: "Food", title: "Premium Sushi Set (20 pcs)", price: 38 },
-    { id: 10, category: "Other", title: "Ceramic Flower Pot", price: 55 },
     {
-      id: 11,
+      id: uuidv4(),
+      category: "Food",
+      title: "Premium Sushi Set (20 pcs)",
+      price: 38,
+    },
+    { id: uuidv4(), category: "Other", title: "Ceramic Flower Pot", price: 55 },
+    {
+      id: uuidv4(),
       category: "Electronics",
       title: "iPhone 15 Pro Max",
       price: 1200,
     },
     {
-      id: 12,
+      id: uuidv4(),
       category: "Clothes",
       title: "Puma Women's Sports Jacket",
       price: 75,
     },
-    { id: 13, category: "Books", title: "Four Agreements", price: 16 },
-    { id: 14, category: "Food", title: "Deluxe Burger with Fries", price: 22 },
+    { id: uuidv4(), category: "Books", title: "Four Agreements", price: 16 },
     {
-      id: 15,
+      id: uuidv4(),
+      category: "Food",
+      title: "Deluxe Burger with Fries",
+      price: 22,
+    },
+    {
+      id: uuidv4(),
       category: "Other",
       title: "Remote Control Robotic Toy",
       price: 65,
     },
     {
-      id: 16,
+      id: uuidv4(),
       category: "Electronics",
       title: "Samsung Galaxy Tab S9",
       price: 800,
     },
-    { id: 17, category: "Clothes", title: "Levi's 501 Jeans", price: 90 },
-    { id: 18, category: "Books", title: "The Psychology of Money", price: 20 },
-    { id: 19, category: "Food", title: "3-Tier Chocolate Cake", price: 45 },
+    { id: uuidv4(), category: "Clothes", title: "Levi's 501 Jeans", price: 90 },
     {
-      id: 20,
+      id: uuidv4(),
+      category: "Books",
+      title: "The Psychology of Money",
+      price: 20,
+    },
+    {
+      id: uuidv4(),
+      category: "Food",
+      title: "3-Tier Chocolate Cake",
+      price: 45,
+    },
+    {
+      id: uuidv4(),
       category: "Other",
       title: "Casio Classic Wrist Watch",
       price: 120,
     },
     {
-      id: 21,
+      id: uuidv4(),
       category: "Other",
       title: "Casio Classic Wrist Watch",
       price: 340,
     },
     {
-      id: 22,
+      id: uuidv4(),
       category: "Electronics",
       title: "Iphone 17pro",
       price: 1000,
     },
     {
-      id: 23,
+      id: uuidv4(),
       category: "Books",
       title: "The Art of Clear Thinking",
       price: 18,
     },
     {
-      id: 24,
+      id: uuidv4(),
       category: "Electronics",
       title: "Samsung Galaxy Tab S10",
       price: 900,
     },
     {
-      id: 25,
+      id: uuidv4(),
       category: "Electronics",
       title: "Samsung Galaxy Tab S9",
       price: 800,
     },
     {
-      id: 26,
+      id: uuidv4(),
       category: "Books",
       title: "The Art of Clear Thinking",
       price: 18,
@@ -116,18 +163,18 @@ export default function Products() {
   const { currentItems, currentPage, totalPages, pages, handlePageChange } =
     usePagination(data, 5);
 
-  const productFields = [
+  const productFields : Fields[] = [
     { name: "category", label: "Category", type: "text" },
     { name: "title", label: "Title", type: "text" },
     { name: "price", label: "Price", type: "number" },
   ];
-
-  const createFormData = (fields) =>
-    fields.reduce((obj, field) => {
-      obj[field.name] = "";
-      return obj;
-    }, {});
-
+  type FormData = Record<string, string>;
+  const createFormData = (fields: Fields[]): FormData => {
+  return fields.reduce<FormData>((obj, field) => {
+    obj[field.name] = "";
+    return obj;
+  }, {});
+};
   const {
     formData,
     isModalOpen,
@@ -186,7 +233,7 @@ export default function Products() {
                   </tr>
                 </thead>
                 <tbody>
-                  {currentItems.map((item) => (
+                  {currentItems.map((item:Product) => (
                     <tr key={item.id}>
                       <td className="border border-gray-400  p-3">
                         <div className="flex items-center justify-start">
@@ -246,7 +293,7 @@ export default function Products() {
                 </tbody>
               </table>
               <div className="md:hidden mr-2">
-                {currentItems.map((item) => {
+                {currentItems.map((item:Product) => {
                   return (
                     <div
                       key={item.id}

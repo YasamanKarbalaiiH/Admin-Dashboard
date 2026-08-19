@@ -10,10 +10,13 @@ import { usePagination } from "../hooks/usePagination";
 import { useModal } from "../hooks/useModal";
 import { useCrud } from "../hooks/useCrud";
 import { useStatistics } from "../hooks/useStatistics";
+import { v4 as uuidv4 } from "uuid";
+import { Customer } from "../Types/customer";
+import { Fields } from "../Types/fields";
 export default function Customers() {
-  const initialData = [
+  const initialData: Customer[] = [
     {
-      id: 1,
+      id: uuidv4(),
       fullName: "Ali Mohammadi",
       email: "ali.mohammadi@gmail.com",
       phone: "09121234567",
@@ -22,7 +25,7 @@ export default function Customers() {
       registerDate: "2026-08-15T10:30:00",
     },
     {
-      id: 2,
+      id: uuidv4(),
       fullName: "Sara Ahmadi",
       email: "sara.ahmadi@yahoo.com",
       phone: "09129876543",
@@ -31,7 +34,7 @@ export default function Customers() {
       registerDate: "2025-12-03T14:20:00",
     },
     {
-      id: 3,
+      id: uuidv4(),
       fullName: "Reza Karimi",
       email: "reza.karimi@gmail.com",
       phone: "09131239876",
@@ -40,7 +43,7 @@ export default function Customers() {
       registerDate: "2026-02-20T09:15:00",
     },
     {
-      id: 4,
+      id: uuidv4(),
       fullName: "Maryam Hosseini",
       email: "maryam.hosseini@hotmail.com",
       phone: "09142345678",
@@ -49,7 +52,7 @@ export default function Customers() {
       registerDate: "2026-01-28T16:45:00",
     },
     {
-      id: 5,
+      id: uuidv4(),
       fullName: "Mohammad Rezaei",
       email: "mohammad.rezaei@gmail.com",
       phone: "09153456789",
@@ -58,7 +61,7 @@ export default function Customers() {
       registerDate: "2025-11-10T11:00:00",
     },
     {
-      id: 6,
+      id: uuidv4(),
       fullName: "Zahra Naderi",
       email: "zahra.naderi@yahoo.com",
       phone: "09164567890",
@@ -67,7 +70,7 @@ export default function Customers() {
       registerDate: "2025-12-22T08:30:00",
     },
     {
-      id: 7,
+      id: uuidv4(),
       fullName: "Hossein Askari",
       email: "hossein.askari@gmail.com",
       phone: "09175678901",
@@ -76,7 +79,7 @@ export default function Customers() {
       registerDate: "2026-02-01T13:20:00",
     },
     {
-      id: 8,
+      id: uuidv4(),
       fullName: "Negar Sadeghi",
       email: "negar.sadeghi@hotmail.com",
       phone: "09186789012",
@@ -85,7 +88,7 @@ export default function Customers() {
       registerDate: "2026-01-10T10:00:00",
     },
     {
-      id: 9,
+      id: uuidv4(),
       fullName: "Amir Ghasemi",
       email: "amir.ghasemi@gmail.com",
       phone: "09197890123",
@@ -94,7 +97,7 @@ export default function Customers() {
       registerDate: "2025-10-05T09:30:00",
     },
     {
-      id: 10,
+      id: uuidv4(),
       fullName: "Fatemeh Maleki",
       email: "fatemeh.maleki@yahoo.com",
       phone: "09198901234",
@@ -103,7 +106,7 @@ export default function Customers() {
       registerDate: "2025-12-15T15:10:00",
     },
     {
-      id: 11,
+      id: uuidv4(),
       fullName: "Mahdi Jafari",
       email: "mahdi.jafari@gmail.com",
       phone: "09211234567",
@@ -112,7 +115,7 @@ export default function Customers() {
       registerDate: "2026-02-14T11:45:00",
     },
     {
-      id: 12,
+      id: uuidv4(),
       fullName: "Elnaz Heydari",
       email: "elnaz.heydari@hotmail.com",
       phone: "09222345678",
@@ -121,7 +124,7 @@ export default function Customers() {
       registerDate: "2026-01-05T14:00:00",
     },
     {
-      id: 13,
+      id: uuidv4(),
       fullName: "Saeed Mousavi",
       email: "saeed.mousavi@gmail.com",
       phone: "09233456789",
@@ -130,7 +133,7 @@ export default function Customers() {
       registerDate: "2026-03-01T09:00:00",
     },
     {
-      id: 14,
+      id: uuidv4(),
       fullName: "Parisa Kamali",
       email: "parisa.kamali@yahoo.com",
       phone: "09244567890",
@@ -139,7 +142,7 @@ export default function Customers() {
       registerDate: "2025-11-25T16:30:00",
     },
     {
-      id: 15,
+      id: uuidv4(),
       fullName: "Hamid Taheri",
       email: "hamid.taheri@gmail.com",
       phone: "09255678901",
@@ -148,7 +151,7 @@ export default function Customers() {
       registerDate: "2026-02-25T10:15:00",
     },
     {
-      id: 16,
+      id: uuidv4(),
       fullName: "Neda Rahmani",
       email: "neda.rahmani@hotmail.com",
       phone: "09266789012",
@@ -157,7 +160,7 @@ export default function Customers() {
       registerDate: "2026-01-20T12:30:00",
     },
     {
-      id: 17,
+      id: uuidv4(),
       fullName: "Milad Shahini",
       email: "milad.shahini@gmail.com",
       phone: "09277890123",
@@ -166,7 +169,7 @@ export default function Customers() {
       registerDate: "2025-09-15T08:45:00",
     },
     {
-      id: 18,
+      id: uuidv4(),
       fullName: "Elahe Moradi",
       email: "elahe.moradi@yahoo.com",
       phone: "09288901234",
@@ -175,7 +178,7 @@ export default function Customers() {
       registerDate: "2026-02-08T14:50:00",
     },
     {
-      id: 19,
+      id: uuidv4(),
       fullName: "Aref Zamani",
       email: "aref.zamani@gmail.com",
       phone: "09299012345",
@@ -184,7 +187,7 @@ export default function Customers() {
       registerDate: "2025-10-28T17:00:00",
     },
     {
-      id: 20,
+      id: uuidv4(),
       fullName: "Shirin Akbari",
       email: "shirin.akbari@hotmail.com",
       phone: "09311234567",
@@ -204,7 +207,7 @@ export default function Customers() {
   const { currentItems, currentPage, totalPages, pages, handlePageChange } =
     usePagination(data, 5);
   //Modal
-  const customerFields = [
+  const customerFields: Fields[] = [
     {
       name: "fullName",
       label: "Name",
@@ -231,11 +234,13 @@ export default function Customers() {
       type: "text",
     },
   ];
-  const createFormData = (fields) =>
-    fields.reduce((obj, field) => {
+  type FormData = Record<string, string>;
+  const createFormData = (fields: Fields[]): FormData => {
+    return fields.reduce<FormData>((obj, field) => {
       obj[field.name] = "";
       return obj;
     }, {});
+  };
   const {
     formData,
     isModalOpen,
@@ -252,15 +257,25 @@ export default function Customers() {
   const { inActive, VIPcustomers } = stats;
   const threeNewest = useMemo(() => {
     return [...data]
-      .sort((a, b) => new Date(b.registerDate) - new Date(a.registerDate))
+      .sort(
+        (a: Customer, b: Customer) =>
+          new Date(b.registerDate).getTime() -
+          new Date(a.registerDate).getTime(),
+      )
       .slice(0, 3);
   }, [data]);
 
   const newCustomerNum = useMemo(() => {
     const now = new Date();
-    return data.filter(
-      (i) => new Date(i.registerDate).getMonth() === now.getMonth(),
-    ).length;
+
+    return data.filter((i: Customer) => {
+      const registerDate = new Date(i.registerDate);
+
+      return (
+        registerDate.getMonth() === now.getMonth() &&
+        registerDate.getFullYear() === now.getFullYear()
+      );
+    }).length;
   }, [data]);
 
   return (
@@ -356,7 +371,7 @@ export default function Customers() {
                   </tr>
                 </thead>
                 <tbody>
-                  {currentItems.map((item) => (
+                  {currentItems.map((item: Customer) => (
                     <tr key={item.id}>
                       <td className="border border-gray-400  lg:p-3 pt-2 pb-2">
                         <div className="flex items-center justify-start">
@@ -421,7 +436,7 @@ export default function Customers() {
               </table>
 
               <div className="md:hidden mr-2 ">
-                {currentItems.map((item) => {
+                {currentItems.map((item: Customer) => {
                   return (
                     <div className="shadow-2xl rounded-2xl mb-8 p-6 dark:bg-dark-primary text-black">
                       <p className="mb-3 flex">

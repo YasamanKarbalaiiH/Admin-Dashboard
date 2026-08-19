@@ -1,2 +1,3 @@
 # Admin Dashboard
-Admin Dashboard with react and tailwind
+
+Admin Dashboard with react and tailwind and Typescript

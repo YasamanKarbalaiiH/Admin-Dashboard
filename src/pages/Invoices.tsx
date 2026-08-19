@@ -2,11 +2,13 @@ import { usePagination } from "../hooks/usePagination";
 import { useModal } from "../hooks/useModal";
 import { useCrud } from "../hooks/useCrud";
 import Modal from "../components/Modal";
-
+import { v4 as uuidv4 } from "uuid";
+import { Invoice } from "../Types/invoice";
+import { Fields } from "../Types/fields";
 export default function Invoices() {
-  const initialData = [
+  const initialData: Invoice[] = [
     {
-      id: 1,
+      id: uuidv4(),
       customer: "Ali Mohammadi",
       date: "2026-07-01",
       total: 1250000,
@@ -14,7 +16,7 @@ export default function Invoices() {
       items: 3,
     },
     {
-      id: 2,
+      id: uuidv4(),
       customer: "Sara Karimi",
       date: "2026-07-02",
       total: 870000,
@@ -22,7 +24,7 @@ export default function Invoices() {
       items: 2,
     },
     {
-      id: 3,
+      id: uuidv4(),
       customer: "Reza Ahmadi",
       date: "2026-07-03",
       total: 2150000,
@@ -30,7 +32,7 @@ export default function Invoices() {
       items: 5,
     },
     {
-      id: 4,
+      id: uuidv4(),
       customer: "Maryam Hosseini",
       date: "2026-07-04",
       total: 540000,
@@ -38,7 +40,7 @@ export default function Invoices() {
       items: 1,
     },
     {
-      id: 5,
+      id: uuidv4(),
       customer: "Hossein Noori",
       date: "2026-07-05",
       total: 3200000,
@@ -46,7 +48,7 @@ export default function Invoices() {
       items: 7,
     },
     {
-      id: 6,
+      id: uuidv4(),
       customer: "Zahra Rezaei",
       date: "2026-07-06",
       total: 980000,
@@ -54,7 +56,7 @@ export default function Invoices() {
       items: 4,
     },
     {
-      id: 7,
+      id: uuidv4(),
       customer: "Mohammad Taghavi",
       date: "2026-07-07",
       total: 1500000,
@@ -62,7 +64,7 @@ export default function Invoices() {
       items: 3,
     },
     {
-      id: 8,
+      id: uuidv4(),
       customer: "Fatemeh Mousavi",
       date: "2026-07-08",
       total: 760000,
@@ -70,7 +72,7 @@ export default function Invoices() {
       items: 2,
     },
     {
-      id: 9,
+      id: uuidv4(),
       customer: "Amir Alipour",
       date: "2026-07-09",
       total: 4100000,
@@ -78,7 +80,7 @@ export default function Invoices() {
       items: 9,
     },
     {
-      id: 10,
+      id: uuidv4(),
       customer: "Narges Safari",
       date: "2026-07-10",
       total: 620000,
@@ -86,7 +88,7 @@ export default function Invoices() {
       items: 2,
     },
     {
-      id: 11,
+      id: uuidv4(),
       customer: "Mehdi Karimian",
       date: "2026-07-11",
       total: 1850000,
@@ -94,7 +96,7 @@ export default function Invoices() {
       items: 4,
     },
     {
-      id: 12,
+      id: uuidv4(),
       customer: "Leila Javanmard",
       date: "2026-07-12",
       total: 930000,
@@ -102,7 +104,7 @@ export default function Invoices() {
       items: 3,
     },
     {
-      id: 13,
+      id: uuidv4(),
       customer: "Saeed Rahmani",
       date: "2026-07-13",
       total: 2700000,
@@ -110,7 +112,7 @@ export default function Invoices() {
       items: 6,
     },
     {
-      id: 14,
+      id: uuidv4(),
       customer: "Neda Kamali",
       date: "2026-07-14",
       total: 450000,
@@ -118,7 +120,7 @@ export default function Invoices() {
       items: 1,
     },
     {
-      id: 15,
+      id: uuidv4(),
       customer: "Pouya Ehsani",
       date: "2026-07-15",
       total: 3300000,
@@ -126,7 +128,7 @@ export default function Invoices() {
       items: 8,
     },
     {
-      id: 16,
+      id: uuidv4(),
       customer: "Golnaz Bahrami",
       date: "2026-07-16",
       total: 1120000,
@@ -134,7 +136,7 @@ export default function Invoices() {
       items: 3,
     },
     {
-      id: 17,
+      id: uuidv4(),
       customer: "Farhad Soltani",
       date: "2026-07-17",
       total: 680000,
@@ -142,7 +144,7 @@ export default function Invoices() {
       items: 2,
     },
     {
-      id: 18,
+      id: uuidv4(),
       customer: "Shirin Abbasi",
       date: "2026-07-18",
       total: 2050000,
@@ -150,7 +152,7 @@ export default function Invoices() {
       items: 5,
     },
     {
-      id: 19,
+      id: uuidv4(),
       customer: "Kianoosh Pourreza",
       date: "2026-07-19",
       total: 890000,
@@ -158,7 +160,7 @@ export default function Invoices() {
       items: 2,
     },
     {
-      id: 20,
+      id: uuidv4(),
       customer: "Mina Afshari",
       date: "2026-07-20",
       total: 3750000,
@@ -179,7 +181,7 @@ export default function Invoices() {
   const { currentItems, currentPage, totalPages, pages, handlePageChange } =
     usePagination(data, 5);
 
-  const invoiceFields = [
+  const invoiceFields: Fields[] = [
     { name: "customer", label: "Customer", type: "text" },
     { name: "date", label: "Date", type: "date" },
     { name: "total", label: "Total", type: "number" },
@@ -187,11 +189,13 @@ export default function Invoices() {
     { name: "items", label: "Items", type: "number" },
   ];
 
-  const createFormData = (fields) =>
-    fields.reduce((obj, field) => {
+  type FormData = Record<string, string>;
+  const createFormData = (fields: Fields[]): FormData => {
+    return fields.reduce<FormData>((obj, field) => {
       obj[field.name] = "";
       return obj;
     }, {});
+  };
 
   const {
     formData,
@@ -238,7 +242,7 @@ export default function Invoices() {
               </tr>
             </thead>
             <tbody>
-              {currentItems.map((item) => (
+              {currentItems.map((item: Invoice) => (
                 <tr key={item.id}>
                   <td className="border border-gray-400 p-1 lg:p-3">
                     <div className="flex items-center justify-start">
@@ -300,7 +304,7 @@ export default function Invoices() {
             </tbody>
           </table>
           <div className="md:hidden mr-2">
-            {currentItems.map((item) => {
+            {currentItems.map((item: Invoice) => {
               return (
                 <div
                   key={item.id}
