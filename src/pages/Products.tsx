@@ -13,7 +13,7 @@ import { Product } from "../Types/product";
 import { Fields } from "../Types/fields";
 import { v4 as uuidv4 } from "uuid";
 export default function Products() {
-  const initialData : Product[] = [
+  const initialData: Product[] = [
     {
       id: uuidv4(),
       category: "Electronics",
@@ -163,18 +163,11 @@ export default function Products() {
   const { currentItems, currentPage, totalPages, pages, handlePageChange } =
     usePagination(data, 5);
 
-  const productFields : Fields[] = [
+  const productFields: Fields[] = [
     { name: "category", label: "Category", type: "text" },
     { name: "title", label: "Title", type: "text" },
     { name: "price", label: "Price", type: "number" },
   ];
-  type FormData = Record<string, string>;
-  const createFormData = (fields: Fields[]): FormData => {
-  return fields.reduce<FormData>((obj, field) => {
-    obj[field.name] = "";
-    return obj;
-  }, {});
-};
   const {
     formData,
     isModalOpen,
@@ -183,7 +176,7 @@ export default function Products() {
     handleSubmit,
     openModal,
     closeModal,
-  } = useModal(productFields, createFormData, addItem, updateItem);
+  } = useModal(productFields, addItem, updateItem);
 
   const stats = useStatistics(data, {
     elec: { field: "category", value: "Electronics" },
@@ -233,7 +226,7 @@ export default function Products() {
                   </tr>
                 </thead>
                 <tbody>
-                  {currentItems.map((item:Product) => (
+                  {currentItems.map((item: Product) => (
                     <tr key={item.id}>
                       <td className="border border-gray-400  p-3">
                         <div className="flex items-center justify-start">
@@ -293,7 +286,7 @@ export default function Products() {
                 </tbody>
               </table>
               <div className="md:hidden mr-2">
-                {currentItems.map((item:Product) => {
+                {currentItems.map((item: Product) => {
                   return (
                     <div
                       key={item.id}

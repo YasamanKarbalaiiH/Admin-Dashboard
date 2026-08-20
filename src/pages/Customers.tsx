@@ -234,13 +234,7 @@ export default function Customers() {
       type: "text",
     },
   ];
-  type FormData = Record<string, string>;
-  const createFormData = (fields: Fields[]): FormData => {
-    return fields.reduce<FormData>((obj, field) => {
-      obj[field.name] = "";
-      return obj;
-    }, {});
-  };
+
   const {
     formData,
     isModalOpen,
@@ -249,7 +243,7 @@ export default function Customers() {
     handleSubmit,
     openModal,
     closeModal,
-  } = useModal(customerFields, createFormData, addItem, updateItem);
+  } = useModal(customerFields, addItem, updateItem);
   const stats = useStatistics(data, {
     inActive: { field: "status", value: "Not Active" },
     VIPcustomers: { field: "type", value: "VIP" },

@@ -1,16 +1,24 @@
-import { useState } from "react";
-
-export function useModal(fields, createFormData, addItem, updateItem) {
-  const [formData, setFormData] = useState(createFormData(fields));
+import { useState, ChangeEvent, FormEvent } from "react";
+import { Fields, FormData, createFormData } from "../Types/fields";
+export function useModal(
+  fields: Fields[],
+  addItem: (item: FormData) => void,
+  updateItem: (item: FormData & { id: string }) => void,
+) {
+  const [formData, setFormData] = useState<FormData>(createFormData(fields));
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [editingItem, setEditingItem] = useState(null);
+  const [editingItem, setEditingItem] = useState<
+    (FormData & { id: string }) | null
+  >(null);
 
-  const handleChange = (e) => {
+  const handleChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>,
+  ) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+    setFormData((prev: FormData) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (editingItem) {
       updateItem({ ...formData, id: editingItem.id });
@@ -22,7 +30,7 @@ export function useModal(fields, createFormData, addItem, updateItem) {
     setIsModalOpen(false);
   };
 
-  const openModal = (item = null) => {
+  const openModal = (item: any = null) => {
     if (item) {
       setEditingItem(item);
       setFormData(item);

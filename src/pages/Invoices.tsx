@@ -189,14 +189,6 @@ export default function Invoices() {
     { name: "items", label: "Items", type: "number" },
   ];
 
-  type FormData = Record<string, string>;
-  const createFormData = (fields: Fields[]): FormData => {
-    return fields.reduce<FormData>((obj, field) => {
-      obj[field.name] = "";
-      return obj;
-    }, {});
-  };
-
   const {
     formData,
     isModalOpen,
@@ -205,7 +197,7 @@ export default function Invoices() {
     handleSubmit,
     openModal,
     closeModal,
-  } = useModal(invoiceFields, createFormData, addItem, updateItem);
+  } = useModal(invoiceFields, addItem, updateItem);
 
   return (
     <>

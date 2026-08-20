@@ -16,7 +16,7 @@ export default function Home() {
     },
     customers: {
       title: "Customers",
-      value: "400",
+      value: "20",
     },
     invoices: {
       title: "Invoices",
