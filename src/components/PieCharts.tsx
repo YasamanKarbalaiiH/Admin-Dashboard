@@ -1,6 +1,9 @@
 import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from "recharts";
-
-const data = [
+interface PieData {
+  name: string;
+  value: number;
+}
+const data: PieData[] = [
   { name: "Electronics", value: 35 },
   { name: "Books", value: 25 },
   { name: "Clothes", value: 20 },
@@ -37,7 +40,9 @@ export default function PieCharts() {
               ))}
             </Pie>
             <Tooltip
-              formatter={(value) => `${((value / total) * 100).toFixed(0)}%`}
+              formatter={(value) =>
+                `${((Number(value) / total) * 100).toFixed(0)}%`
+              }
               contentStyle={{
                 backgroundColor: "var(--tooltip-bg)",
                 border: "var(--tooltip-border)",

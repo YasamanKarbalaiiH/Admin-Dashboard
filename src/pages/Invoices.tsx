@@ -234,7 +234,7 @@ export default function Invoices() {
               </tr>
             </thead>
             <tbody>
-              {currentItems.map((item: Invoice) => (
+              {currentItems.map((item) => (
                 <tr key={item.id}>
                   <td className="border border-gray-400 p-1 lg:p-3">
                     <div className="flex items-center justify-start">
@@ -296,7 +296,7 @@ export default function Invoices() {
             </tbody>
           </table>
           <div className="md:hidden mr-2">
-            {currentItems.map((item: Invoice) => {
+            {currentItems.map((item) => {
               return (
                 <div
                   key={item.id}
@@ -345,7 +345,11 @@ export default function Invoices() {
               ) : (
                 <button
                   key={page}
-                  onClick={() => handlePageChange(page)}
+                  onClick={() => {
+                    if (typeof page === "number") {
+                      handlePageChange(page);
+                    }
+                  }}
                   className={`w-8 px-3 py-1 rounded-lg border border-light-border dark:border-white ${
                     currentPage === page
                       ? "bg-light-primary dark:bg-dark-primary text-black"

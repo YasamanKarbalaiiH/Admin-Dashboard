@@ -1,7 +1,10 @@
 import { useSearch } from "./useSearch";
 import { useMemo } from "react";
-
-export function usePagination(data, itemsPerPage = 5) {
+type Item = {
+  id: string;
+  [key: string]: any;
+};
+export function usePagination(data: Item[], itemsPerPage = 5) {
   const { search, currentPage, setCurrentPage } = useSearch();
 
   const filteredData = useMemo(() => {
@@ -46,7 +49,7 @@ export function usePagination(data, itemsPerPage = 5) {
     ];
   }, [currentPage, totalPages]);
 
-  const handlePageChange = (pageNumber) => {
+  const handlePageChange = (pageNumber: number) => {
     setCurrentPage(pageNumber);
   };
 

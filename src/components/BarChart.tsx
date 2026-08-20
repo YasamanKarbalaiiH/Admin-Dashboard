@@ -17,8 +17,20 @@ ChartJS.register(
   Tooltip,
   Legend,
 );
-
-export default function BarChart({ elec, cloths, food, book, other }) {
+interface BarChartProps {
+  elec: number;
+  cloths: number;
+  food: number;
+  book: number;
+  other: number;
+}
+export default function BarChart({
+  elec,
+  cloths,
+  food,
+  book,
+  other,
+}: BarChartProps) {
   const data = {
     labels: ["Electronics", "Clothes", "Books", "Food", "Other"],
     datasets: [
@@ -52,7 +64,7 @@ export default function BarChart({ elec, cloths, food, book, other }) {
         beginAtZero: true,
         max: Math.max(elec, cloths, food, book, other) + 1,
         ticks: {
-          callback: function (value) {
+          callback: function (value: number | string) {
             return Number.isInteger(value) ? value : null;
           },
         },

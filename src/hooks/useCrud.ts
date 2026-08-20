@@ -1,10 +1,17 @@
 import { useState } from "react";
 import Swal from "sweetalert2";
 import { v4 as uuidv4 } from "uuid";
-export function useCrud(initialData, transformItem = (item) => item) {
+type Item = {
+  id: string;
+  [key: string]: any;
+};
+export function useCrud(
+  initialData: Item[],
+  transformItem = (item: any) => item,
+) {
   const [data, setData] = useState(initialData);
 
-  const addItem = (newItem) => {
+  const addItem = (newItem: any) => {
     setData((prev) => [
       ...prev,
       {
@@ -14,7 +21,7 @@ export function useCrud(initialData, transformItem = (item) => item) {
     ]);
   };
 
-  const updateItem = (updatedItem) => {
+  const updateItem = (updatedItem: Item) => {
     setData((prev) =>
       prev.map((item) =>
         item.id === updatedItem.id ? transformItem(updatedItem) : item,
@@ -22,7 +29,7 @@ export function useCrud(initialData, transformItem = (item) => item) {
     );
   };
 
-  const deleteItem = (id, itemName = "item") => {
+  const deleteItem = (id: string, itemName = "item") => {
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",

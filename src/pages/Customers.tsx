@@ -252,7 +252,7 @@ export default function Customers() {
   const threeNewest = useMemo(() => {
     return [...data]
       .sort(
-        (a: Customer, b: Customer) =>
+        (a, b) =>
           new Date(b.registerDate).getTime() -
           new Date(a.registerDate).getTime(),
       )
@@ -262,7 +262,7 @@ export default function Customers() {
   const newCustomerNum = useMemo(() => {
     const now = new Date();
 
-    return data.filter((i: Customer) => {
+    return data.filter((i) => {
       const registerDate = new Date(i.registerDate);
 
       return (
@@ -365,7 +365,7 @@ export default function Customers() {
                   </tr>
                 </thead>
                 <tbody>
-                  {currentItems.map((item: Customer) => (
+                  {currentItems.map((item) => (
                     <tr key={item.id}>
                       <td className="border border-gray-400  lg:p-3 pt-2 pb-2">
                         <div className="flex items-center justify-start">
@@ -430,7 +430,7 @@ export default function Customers() {
               </table>
 
               <div className="md:hidden mr-2 ">
-                {currentItems.map((item: Customer) => {
+                {currentItems.map((item) => {
                   return (
                     <div className="shadow-2xl rounded-2xl mb-8 p-6 dark:bg-dark-primary text-black">
                       <p className="mb-3 flex">
@@ -508,7 +508,11 @@ export default function Customers() {
                     ) : (
                       <button
                         key={page}
-                        onClick={() => handlePageChange(page)}
+                        onClick={() => {
+                          if (typeof page === "number") {
+                            handlePageChange(page);
+                          }
+                        }}
                         className={`w-8 px-3 py-1 rounded-lg border border-light-border dark:border-white ${
                           currentPage === page
                             ? "bg-light-primary dark:bg-dark-primary text-black"

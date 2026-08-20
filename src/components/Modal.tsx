@@ -1,3 +1,4 @@
+import { ModalProps } from "../Types/modal";
 export default function Modal({
   isOpen,
   onClose,
@@ -7,7 +8,7 @@ export default function Modal({
   handleSubmit,
   title,
   submitText,
-}) {
+}: ModalProps) {
   if (!isOpen) return null;
 
   return (

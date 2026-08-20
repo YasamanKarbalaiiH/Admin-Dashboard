@@ -8,8 +8,12 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
-
-const data = [
+interface RevenueChartData {
+  name: string;
+  revenue: number;
+  expenses: number;
+}
+const data: RevenueChartData[] = [
   { name: "Jan", revenue: 4000, expenses: 2400 },
   { name: "Feb", revenue: 3000, expenses: 1398 },
   { name: "Mar", revenue: 2000, expenses: 9800 },
