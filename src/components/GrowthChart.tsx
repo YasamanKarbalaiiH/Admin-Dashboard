@@ -10,9 +10,27 @@ import {
   ResponsiveContainer,
 } from "recharts";
 
-const GrowthChart = ({ data }) => {
-  const monthlyData = useMemo(() => {
-    const monthly = {};
+interface CustomerData {
+  registerDate: string;
+}
+
+interface MonthlyData {
+  month: string;
+  monthName: string;
+  count: number;
+}
+
+interface GrowthData extends MonthlyData {
+  growth: number;
+}
+
+interface GrowthChartProps {
+  data: CustomerData[];
+}
+
+const GrowthChart = ({ data }: GrowthChartProps) => {
+  const monthlyData: MonthlyData[] = useMemo(() => {
+    const monthly: Record<string, MonthlyData> = {};
 
     data.forEach((item) => {
       const date = new Date(item.registerDate);
@@ -37,7 +55,7 @@ const GrowthChart = ({ data }) => {
       .map((key) => monthly[key]);
   }, [data]);
 
-  const growthData = useMemo(() => {
+  const growthData: GrowthData[] = useMemo(() => {
     return monthlyData.map((item, index) => {
       if (index === 0) {
         return { ...item, growth: 0 };
@@ -59,7 +77,7 @@ const GrowthChart = ({ data }) => {
     >
       <h2
         style={{ marginBottom: "30px" }}
-        className="text-black  font-bold text-lg"
+        className="text-black font-bold text-lg"
       >
         Customer Growth Chart
       </h2>
@@ -85,11 +103,12 @@ const GrowthChart = ({ data }) => {
             />
             <Tooltip
               formatter={(value, name) => {
-                const labels = {
+                const labels: Record<string, string> = {
                   count: "Total Customers",
                   growth: "Growth %",
                 };
-                return [value, labels[name] || name];
+
+                return [value ?? 0, labels[String(name)] || String(name)];
               }}
               contentStyle={{
                 backgroundColor: "var(--tooltip-bg)",

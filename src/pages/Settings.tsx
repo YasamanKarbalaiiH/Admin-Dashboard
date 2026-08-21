@@ -1,22 +1,22 @@
 import Profile from "../assets/images/images.png";
-import { useRef, useState } from "react";
+import { useRef, useState, ChangeEvent } from "react";
 export default function Settings() {
   const [profileImage, setProfileImage] = useState(() => {
     return localStorage.getItem("profileImage") || null;
   });
-  const fileInputRef = useRef(null);
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
 
   function changeProfile() {
-    fileInputRef.current.click();
+    fileInputRef.current?.click();
   }
 
-  function handleImageChange(event) {
-    const file = event.target.files[0];
+  function handleImageChange(event: ChangeEvent<HTMLInputElement>) {
+    const file = event.target.files?.[0];
     if (file) {
       const reader = new FileReader();
-      reader.onload = (e) => {
-        const imageData = e.target.result;
-        setProfileImage(e.target.result);
+      reader.onload = (e: ProgressEvent<FileReader>) => {
+        const imageData = e.target?.result as string;
+        setProfileImage(imageData);
         localStorage.setItem("profileImage", imageData);
       };
       reader.readAsDataURL(file);
@@ -120,7 +120,7 @@ export default function Settings() {
               Address
             </label>
             <textarea
-              rows="3"
+              rows={3}
               defaultValue="Tehran, Iran"
               className="w-full p-2 border border-light-accent dark:border-dark-border rounded-lg bg-white dark:bg-dark-bg text-dark-bg dark:text-white focus:outline-none focus:ring-2 focus:ring-light-accent dark:focus:ring-dark-border"
             />
