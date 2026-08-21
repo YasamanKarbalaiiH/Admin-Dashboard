@@ -3,8 +3,15 @@ import { useModal } from "../hooks/useModal";
 import { useCrud } from "../hooks/useCrud";
 import Modal from "../components/Modal";
 import { v4 as uuidv4 } from "uuid";
-import { Invoice } from "../Types/invoice";
 import { Fields } from "../Types/fields";
+interface Invoice {
+  id: string;
+  customer: string;
+  date: string;
+  total: number;
+  status: string;
+  items: number;
+}
 export default function Invoices() {
   const initialData: Invoice[] = [
     {

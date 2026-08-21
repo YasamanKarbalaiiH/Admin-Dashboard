@@ -11,8 +11,17 @@ import { useModal } from "../hooks/useModal";
 import { useCrud } from "../hooks/useCrud";
 import { useStatistics } from "../hooks/useStatistics";
 import { v4 as uuidv4 } from "uuid";
-import { Customer } from "../Types/customer";
 import { Fields } from "../Types/fields";
+
+interface Customer {
+  id: string;
+  fullName: string;
+  email: string;
+  phone: string;
+  status: string;
+  type: string;
+  registerDate: string;
+}
 export default function Customers() {
   const initialData: Customer[] = [
     {

@@ -9,9 +9,16 @@ import sushi from "../assets/images/icons8-sushi-64.png";
 import books from "../assets/images/icons8-books-64.png";
 import shirt from "../assets/images/icons8-t-shirt-64.png";
 import others from "../assets/images/icons8-product-64.png";
-import { Product } from "../Types/product";
 import { Fields } from "../Types/fields";
 import { v4 as uuidv4 } from "uuid";
+
+interface Product {
+  id: string;
+  category: string;
+  title: string;
+  price: number;
+}
+
 export default function Products() {
   const initialData: Product[] = [
     {

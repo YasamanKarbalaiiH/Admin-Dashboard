@@ -10,10 +10,6 @@ import {
   ResponsiveContainer,
 } from "recharts";
 
-interface CustomerData {
-  registerDate: string;
-}
-
 interface MonthlyData {
   month: string;
   monthName: string;
@@ -25,7 +21,7 @@ interface GrowthData extends MonthlyData {
 }
 
 interface GrowthChartProps {
-  data: CustomerData[];
+  data: Array<Record<string, any>>;
 }
 
 const GrowthChart = ({ data }: GrowthChartProps) => {
