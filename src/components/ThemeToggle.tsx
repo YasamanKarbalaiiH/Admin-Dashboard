@@ -1,12 +1,10 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 export default function ThemeToggle() {
-  let [dark, setDark] = useState(() => {
-    return localStorage.getItem("theme") === "dark";
-  });
-  useEffect(() => {
-    let html = document.querySelector("html");
-    let body = document.querySelector("body");
+  let [dark, setDark] = useState(false);
+  let html = document.querySelector("html");
+  let body = document.querySelector("body");
+  function darkMode() {
     if (!html || !body) return;
     if (dark) {
       html.classList.remove("dark");
@@ -21,8 +19,9 @@ export default function ThemeToggle() {
       body.classList.remove("bg-light-bg");
       localStorage.setItem("theme", "dark");
     }
-  }, [dark]);
+  }
   function changeMode() {
+    darkMode();
     setDark(!dark);
   }
   return (
