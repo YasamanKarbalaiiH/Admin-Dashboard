@@ -1,9 +1,6 @@
 import { useSearch } from "./useSearch";
 import { useMemo } from "react";
-type Item = {
-  id: string;
-  [key: string]: any;
-};
+import { Item } from "../Types/item";
 export function usePagination(data: Item[], itemsPerPage = 5) {
   const { search, currentPage, setCurrentPage } = useSearch();
 

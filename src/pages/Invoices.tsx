@@ -4,19 +4,7 @@ import { useCrud } from "../hooks/useCrud";
 import Modal from "../components/Modal";
 import { v4 as uuidv4 } from "uuid";
 import { Fields } from "../Types/fields";
-enum InvoiceStatus {
-  Paid = "Paid",
-  Pending = "Pending",
-  Cancelled = "overdue",
-}
-interface Invoice {
-  id: string;
-  customer: string;
-  date: string;
-  total: number;
-  status: InvoiceStatus;
-  items: number;
-}
+import { Invoice, InvoiceStatus } from "../Types/invoice";
 export default function Invoices() {
   const initialData: Invoice[] = [
     {

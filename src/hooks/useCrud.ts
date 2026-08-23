@@ -1,10 +1,7 @@
 import { useState } from "react";
 import Swal from "sweetalert2";
 import { v4 as uuidv4 } from "uuid";
-type Item = {
-  id: string;
-  [key: string]: any;
-};
+import { Item } from "../Types/item";
 export function useCrud(
   initialData: Item[],
   transformItem = (item: any) => item,

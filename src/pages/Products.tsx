@@ -11,14 +11,7 @@ import shirt from "../assets/images/icons8-t-shirt-64.png";
 import others from "../assets/images/icons8-product-64.png";
 import { Fields } from "../Types/fields";
 import { v4 as uuidv4 } from "uuid";
-type Category = "Electronics" | "Books" | "Clothes" | "Food" | "Other";
-interface Product {
-  id: string;
-  category: Category;
-  title: string;
-  price: number;
-}
-
+import { Product } from "../Types/product";
 export default function Products() {
   const initialData: Product[] = [
     {

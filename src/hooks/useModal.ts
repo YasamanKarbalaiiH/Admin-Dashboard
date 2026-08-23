@@ -1,16 +1,6 @@
 import { useState, ChangeEvent, FormEvent } from "react";
 import { Fields, FormData, createFormData } from "../Types/fields";
 
-type ModalProps = {
-  isOpen: boolean;
-  onClose: () => void;
-  fields: Fields[];
-  formData: FormData;
-  handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
-  title: string;
-  submitText: string;
-};
 
 export function useModal(
   fields: Fields[],
