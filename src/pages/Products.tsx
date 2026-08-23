@@ -62,7 +62,7 @@ export default function Products() {
             submitText={editingProduct ? "Update" : "Save"}
           />
         </div>
-        <div className="flex flex-col lg:flex-row justify-between">
+        <div className="flex flex-col lg:flex-row justify-between flex-wrap">
           <div className="flex flex-col justify-center items-center">
             <div className="mt-2 w-full ">
               <table className="md:table hidden lg:w-[87%] w-full h-62.5 lg:h-auto lg:ml-57.5  border-collapse dark:bg-dark-primary text-black ">

@@ -4,6 +4,7 @@ export default function ThemeToggle() {
   let [dark, setDark] = useState(false);
   let html = document.querySelector("html");
   let body = document.querySelector("body");
+
   function darkMode() {
     if (!html || !body) return;
     if (dark) {
