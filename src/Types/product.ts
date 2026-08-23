@@ -1,4 +1,5 @@
 import { v4 as uuidv4 } from "uuid";
+import { Fields } from "./fields";
 type Category = "Electronics" | "Books" | "Clothes" | "Food" | "Other";
 interface Product {
   id: string;
@@ -143,4 +144,9 @@ export const productData: Product[] = [
     title: "The Art of Clear Thinking",
     price: 18,
   },
+];
+export const productFields: Fields[] = [
+  { name: "category", label: "Category", type: "text" },
+  { name: "title", label: "Title", type: "text" },
+  { name: "price", label: "Price", type: "number" },
 ];

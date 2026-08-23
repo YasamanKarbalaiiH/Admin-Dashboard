@@ -2,8 +2,7 @@ import { usePagination } from "../hooks/usePagination";
 import { useModal } from "../hooks/useModal";
 import { useCrud } from "../hooks/useCrud";
 import Modal from "../components/Modal";
-import { Fields } from "../Types/fields";
-import { invoiceData } from "../Types/invoice";
+import { invoiceData, invoiceFields } from "../Types/invoice";
 export default function Invoices() {
   const { data, addItem, updateItem, deleteItem } = useCrud(
     invoiceData,
@@ -16,14 +15,6 @@ export default function Invoices() {
 
   const { currentItems, currentPage, totalPages, pages, handlePageChange } =
     usePagination(data, 5);
-
-  const invoiceFields: Fields[] = [
-    { name: "customer", label: "Customer", type: "text" },
-    { name: "date", label: "Date", type: "date" },
-    { name: "total", label: "Total", type: "number" },
-    { name: "status", label: "Status", type: "text" },
-    { name: "items", label: "Items", type: "number" },
-  ];
 
   const {
     formData,
@@ -116,9 +107,9 @@ export default function Invoices() {
                     <p
                       className={` w-full rounded-lg text-center p-1
                         ${
-                          item.status === "paid"
+                          item.status === "Paid"
                             ? "bg-green-400 "
-                            : item.status === "pending"
+                            : item.status === "Pending"
                               ? "bg-yellow-300  "
                               : "bg-red-400 "
                         }
@@ -145,9 +136,9 @@ export default function Invoices() {
                   <p
                     className={`w-full  rounded-lg text-center p-1 mt-3
                         ${
-                          item.status === "paid"
+                          item.status === "Paid"
                             ? "bg-green-400 "
-                            : item.status === "pending"
+                            : item.status === "Pending"
                               ? "bg-yellow-300  "
                               : "bg-red-400 "
                         }

@@ -10,9 +10,7 @@ import { usePagination } from "../hooks/usePagination";
 import { useModal } from "../hooks/useModal";
 import { useCrud } from "../hooks/useCrud";
 import { useStatistics } from "../hooks/useStatistics";
-import { v4 as uuidv4 } from "uuid";
-import { Fields } from "../Types/fields";
-import { customerData } from "../Types/customer";
+import { customerData, customerFields } from "../Types/customer";
 
 export default function Customers() {
   const { data, addItem, updateItem, deleteItem } = useCrud(
@@ -26,33 +24,6 @@ export default function Customers() {
   const { currentItems, currentPage, totalPages, pages, handlePageChange } =
     usePagination(data, 5);
   //Modal
-  const customerFields: Fields[] = [
-    {
-      name: "fullName",
-      label: "Name",
-      type: "text",
-    },
-    {
-      name: "email",
-      label: "Email",
-      type: "email",
-    },
-    {
-      name: "phone",
-      label: "Phone",
-      type: "text",
-    },
-    {
-      name: "status",
-      label: "Status",
-      type: "text",
-    },
-    {
-      name: "type",
-      label: "Type",
-      type: "text",
-    },
-  ];
 
   const {
     formData,

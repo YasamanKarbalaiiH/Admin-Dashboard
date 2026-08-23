@@ -1,10 +1,12 @@
 import { v4 as uuidv4 } from "uuid";
+import { Fields } from "./fields";
+type Status = "Active" | "Not Active";
 interface Customer {
   id: string;
   fullName: string;
   email: string;
   phone: string;
-  status: string;
+  status: Status;
   type: string;
   registerDate: string;
 }
@@ -188,5 +190,32 @@ export const customerData: Customer[] = [
     status: "Active",
     type: "VIP",
     registerDate: "2026-03-05T13:00:00",
+  },
+];
+export const customerFields: Fields[] = [
+  {
+    name: "fullName",
+    label: "Name",
+    type: "text",
+  },
+  {
+    name: "email",
+    label: "Email",
+    type: "email",
+  },
+  {
+    name: "phone",
+    label: "Phone",
+    type: "text",
+  },
+  {
+    name: "status",
+    label: "Status",
+    type: "text",
+  },
+  {
+    name: "type",
+    label: "Type",
+    type: "text",
   },
 ];

@@ -1,9 +1,7 @@
 import { v4 as uuidv4 } from "uuid";
-enum InvoiceStatus {
-  Paid = "Paid",
-  Pending = "Pending",
-  Cancelled = "overdue",
-}
+import { Fields } from "./fields";
+type InvoiceStatus = "Paid" | "Pending" | "Cancelled";
+
 interface Invoice {
   id: string;
   customer: string;
@@ -18,7 +16,7 @@ export const invoiceData: Invoice[] = [
     customer: "Ali Mohammadi",
     date: "2026-07-01",
     total: 1250000,
-    status: InvoiceStatus.Paid,
+    status: "Paid",
     items: 3,
   },
   {
@@ -26,7 +24,7 @@ export const invoiceData: Invoice[] = [
     customer: "Sara Karimi",
     date: "2026-07-02",
     total: 870000,
-    status: InvoiceStatus.Pending,
+    status: "Pending",
     items: 2,
   },
   {
@@ -34,7 +32,7 @@ export const invoiceData: Invoice[] = [
     customer: "Reza Ahmadi",
     date: "2026-07-03",
     total: 2150000,
-    status: InvoiceStatus.Paid,
+    status: "Paid",
     items: 5,
   },
   {
@@ -42,7 +40,7 @@ export const invoiceData: Invoice[] = [
     customer: "Maryam Hosseini",
     date: "2026-07-04",
     total: 540000,
-    status: InvoiceStatus.Cancelled,
+    status: "Cancelled",
     items: 1,
   },
   {
@@ -50,7 +48,7 @@ export const invoiceData: Invoice[] = [
     customer: "Hossein Noori",
     date: "2026-07-05",
     total: 3200000,
-    status: InvoiceStatus.Paid,
+    status: "Paid",
     items: 7,
   },
   {
@@ -58,7 +56,7 @@ export const invoiceData: Invoice[] = [
     customer: "Zahra Rezaei",
     date: "2026-07-06",
     total: 980000,
-    status: InvoiceStatus.Pending,
+    status: "Pending",
     items: 4,
   },
   {
@@ -66,7 +64,7 @@ export const invoiceData: Invoice[] = [
     customer: "Mohammad Taghavi",
     date: "2026-07-07",
     total: 1500000,
-    status: InvoiceStatus.Paid,
+    status: "Paid",
     items: 3,
   },
   {
@@ -74,7 +72,7 @@ export const invoiceData: Invoice[] = [
     customer: "Fatemeh Mousavi",
     date: "2026-07-08",
     total: 760000,
-    status: InvoiceStatus.Cancelled,
+    status: "Cancelled",
     items: 2,
   },
   {
@@ -82,7 +80,7 @@ export const invoiceData: Invoice[] = [
     customer: "Amir Alipour",
     date: "2026-07-09",
     total: 4100000,
-    status: InvoiceStatus.Paid,
+    status: "Paid",
     items: 9,
   },
   {
@@ -90,7 +88,7 @@ export const invoiceData: Invoice[] = [
     customer: "Narges Safari",
     date: "2026-07-10",
     total: 620000,
-    status: InvoiceStatus.Pending,
+    status: "Pending",
     items: 2,
   },
   {
@@ -98,7 +96,7 @@ export const invoiceData: Invoice[] = [
     customer: "Mehdi Karimian",
     date: "2026-07-11",
     total: 1850000,
-    status: InvoiceStatus.Paid,
+    status: "Paid",
     items: 4,
   },
   {
@@ -106,7 +104,7 @@ export const invoiceData: Invoice[] = [
     customer: "Leila Javanmard",
     date: "2026-07-12",
     total: 930000,
-    status: InvoiceStatus.Cancelled,
+    status: "Cancelled",
     items: 3,
   },
   {
@@ -114,7 +112,7 @@ export const invoiceData: Invoice[] = [
     customer: "Saeed Rahmani",
     date: "2026-07-13",
     total: 2700000,
-    status: InvoiceStatus.Pending,
+    status: "Pending",
     items: 6,
   },
   {
@@ -122,7 +120,7 @@ export const invoiceData: Invoice[] = [
     customer: "Neda Kamali",
     date: "2026-07-14",
     total: 450000,
-    status: InvoiceStatus.Paid,
+    status: "Paid",
     items: 1,
   },
   {
@@ -130,7 +128,7 @@ export const invoiceData: Invoice[] = [
     customer: "Pouya Ehsani",
     date: "2026-07-15",
     total: 3300000,
-    status: InvoiceStatus.Paid,
+    status: "Paid",
     items: 8,
   },
   {
@@ -138,7 +136,7 @@ export const invoiceData: Invoice[] = [
     customer: "Golnaz Bahrami",
     date: "2026-07-16",
     total: 1120000,
-    status: InvoiceStatus.Pending,
+    status: "Pending",
     items: 3,
   },
   {
@@ -146,7 +144,7 @@ export const invoiceData: Invoice[] = [
     customer: "Farhad Soltani",
     date: "2026-07-17",
     total: 680000,
-    status: InvoiceStatus.Cancelled,
+    status: "Cancelled",
     items: 2,
   },
   {
@@ -154,7 +152,7 @@ export const invoiceData: Invoice[] = [
     customer: "Shirin Abbasi",
     date: "2026-07-18",
     total: 2050000,
-    status: InvoiceStatus.Paid,
+    status: "Paid",
     items: 5,
   },
   {
@@ -162,7 +160,7 @@ export const invoiceData: Invoice[] = [
     customer: "Kianoosh Pourreza",
     date: "2026-07-19",
     total: 890000,
-    status: InvoiceStatus.Pending,
+    status: "Pending",
     items: 2,
   },
   {
@@ -170,7 +168,14 @@ export const invoiceData: Invoice[] = [
     customer: "Mina Afshari",
     date: "2026-07-20",
     total: 3750000,
-    status: InvoiceStatus.Paid,
+    status: "Paid",
     items: 10,
   },
+];
+export const invoiceFields: Fields[] = [
+  { name: "customer", label: "Customer", type: "text" },
+  { name: "date", label: "Date", type: "date" },
+  { name: "total", label: "Total", type: "number" },
+  { name: "status", label: "Status", type: "text" },
+  { name: "items", label: "Items", type: "number" },
 ];

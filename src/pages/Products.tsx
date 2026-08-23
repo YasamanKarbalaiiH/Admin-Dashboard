@@ -9,8 +9,7 @@ import sushi from "../assets/images/icons8-sushi-64.png";
 import books from "../assets/images/icons8-books-64.png";
 import shirt from "../assets/images/icons8-t-shirt-64.png";
 import others from "../assets/images/icons8-product-64.png";
-import { Fields } from "../Types/fields";
-import { productData } from "../Types/product";
+import { productData, productFields } from "../Types/product";
 export default function Products() {
   const { data, addItem, updateItem, deleteItem } = useCrud(
     productData,
@@ -23,11 +22,6 @@ export default function Products() {
   const { currentItems, currentPage, totalPages, pages, handlePageChange } =
     usePagination(data, 5);
 
-  const productFields: Fields[] = [
-    { name: "category", label: "Category", type: "text" },
-    { name: "title", label: "Title", type: "text" },
-    { name: "price", label: "Price", type: "number" },
-  ];
   const {
     formData,
     isModalOpen,
