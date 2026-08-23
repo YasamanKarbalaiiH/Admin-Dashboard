@@ -1,13 +1,14 @@
 import { v4 as uuidv4 } from "uuid";
 import { Fields } from "./fields";
 type Status = "Active" | "Not Active";
+type Mode = "Normal" | "VIP";
 interface Customer {
   id: string;
   fullName: string;
   email: string;
   phone: string;
   status: Status;
-  type: string;
+  type: Mode;
   registerDate: string;
 }
 export const customerData: Customer[] = [
