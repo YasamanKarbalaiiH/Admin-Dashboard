@@ -116,7 +116,7 @@ export default function Customers() {
             </div>
           </div>
         </div>
-        <div className="flex justify-end mr-7 mt-8">
+        <div className="flex justify-end xl:justify-center mr-7 mt-8">
           <button
             onClick={() => {
               openModal();
@@ -136,7 +136,7 @@ export default function Customers() {
             submitText={editingCustomer ? "Update" : "Save"}
           />
         </div>
-        <div className="flex flex-col xl:flex-row justify-between xl:items-start">
+        <div className="flex flex-col xl:flex-row justify-center gap-40 xl:items-start">
           <div className="flex flex-col justify-center items-center md:w-full lg:w-auto">
             <div className="mt-2 w-full mr-2  ">
               <table className="hidden md:table lg:ml-57.5 md:w-full lg:w-auto border-collapse dark:bg-dark-primary text-black">
@@ -329,7 +329,7 @@ export default function Customers() {
               </div>
             </div>
           </div>
-          <div className="flex flex-col justify-center items-center gap-5 mt-9">
+          <div className="flex flex-col justify-center items-center gap-5 mt-1">
             <div className="w-full xl:w-72.75 lg:w-[70%] lg:ml-40 xl:ml-0">
               <GrowthChart data={data} />
             </div>

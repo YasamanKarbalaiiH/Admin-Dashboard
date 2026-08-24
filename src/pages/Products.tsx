@@ -44,7 +44,7 @@ export default function Products() {
   return (
     <>
       <div className="grid grid-cols-1 gap-4 text-sm lg:text-md lg:p-2 pl-4 pr-2 pb-2 pt-2">
-        <div className="flex justify-end mr-7 mt-8">
+        <div className="flex justify-end xl:justify-center mr-7 mt-8">
           <button
             onClick={() => openModal()}
             className=" outline-none border-2 dark:bg-dark-surface dark:border-dark-primary border-light-primary p-3 rounded-lg hover:bg-light-accent dark:hover:bg-dark-border"
@@ -62,7 +62,7 @@ export default function Products() {
             submitText={editingProduct ? "Update" : "Save"}
           />
         </div>
-        <div className="flex flex-col lg:flex-row justify-between flex-wrap">
+        <div className="flex flex-col lg:flex-row justify-center gap-40 flex-wrap">
           <div className="flex flex-col justify-center items-center">
             <div className="mt-2 w-full ">
               <table className="md:table hidden lg:w-[87%] w-full h-62.5 lg:h-auto lg:ml-57.5  border-collapse dark:bg-dark-primary text-black ">
